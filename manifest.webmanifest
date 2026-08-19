@@ -1,0 +1,9 @@
+{
+  "name": "Oahu Notary Services",
+  "short_name": "Oahu Notary",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f3ea",
+  "theme_color": "#1f4a3a",
+  "icons": []
+}
