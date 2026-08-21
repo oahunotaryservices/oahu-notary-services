@@ -1,0 +1,20 @@
+OAHU NOTARY SERVICES — WEBSITE FILES
+
+Main pages:
+- index.html
+- services.html
+- signings.html
+- pricing.html
+- estimate.html
+- apostille.html
+- reviews.html
+- contact.html
+- privacy.html
+
+Shared design files:
+- assets/css/styles.css
+- assets/js/site.js
+
+Important pricing values are centralized in assets/js/site.js for the estimator and loan-signing matrix.
+
+The requested Nexa Pro Text and Utopia font families are referenced as local fonts with professional fallbacks. To guarantee those exact fonts for every visitor, add properly licensed webfont files and update the @font-face sources in assets/css/styles.css. Noto Sans loads from Google Fonts.

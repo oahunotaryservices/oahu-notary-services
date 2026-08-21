@@ -6,17 +6,58 @@ const ONS = {
   website: 'https://www.oahunotaryservices.com',
   googleReviews: 'https://www.google.com/search?q=Oahu+Notary+Services+Honolulu+reviews',
   yelpReviews: 'https://www.yelp.com/search?find_desc=Oahu+Notary+Services&find_loc=Honolulu%2C+HI',
-  travel: { 'South Oʻahu':75, 'East Oʻahu':85, 'Central Oʻahu':95, 'West Oʻahu':95, 'North Oʻahu':130 },
-  estate: { 'South Oʻahu':95, 'East Oʻahu':100, 'Central Oʻahu':115, 'West Oʻahu':120, 'North Oʻahu':150 },
-  notarialAct: 5,
-  timing: { 'Standard appointment':0, 'Same-day / less than 24 hours':50, 'Peak traffic, Mon–Fri 4–7 PM':25, 'Late-hour appointment, 8 PM–9 AM':50, 'State or federal holiday':50 },
-  special: { 'None':0, 'Hospital / care facility':25, 'Correctional facility':50, 'Hotel':25 },
+
+  // Standard mobile pricing: travel / meeting / appointment time.
+  travel: {
+    'South Oʻahu': 65,
+    'East Oʻahu': 75,
+    'Central Oʻahu': 85,
+    'West Oʻahu': 90,
+    'North Oʻahu': 125
+  },
+
+  // Estate-planning signing starting prices by service area.
+  estate: {
+    'South Oʻahu': 95,
+    'East Oʻahu': 100,
+    'Central Oʻahu': 115,
+    'West Oʻahu': 120,
+    'North Oʻahu': 150
+  },
+
+  // Notarial fee added to standard and real-estate / loan estimates.
+  notarialFee: 5,
+
+  loanPackages: {
+    'Single deed / small real-estate signing': 35,
+    'Seller package': 60,
+    'Loan modification': 60,
+    'Buyer / cash purchase package': 75,
+    'Refinance / HELOC package': 90,
+    'Large / specialty loan package': 110
+  },
+
+  timing: {
+    'Standard appointment': 0,
+    'Same-day / less than 24 hours': 50,
+    'Peak traffic, Mon–Fri 4–7 PM': 25,
+    'Late-hour appointment, 9 PM–7 AM': 50,
+    'State or federal holiday': 50
+  },
+
+  special: {
+    'None': 0,
+    'Hospital / care facility': 25,
+    'Correctional facility': 80,
+    'Hotel': 25
+  },
+
   extraTime: 10,
   printing: .25,
   scanBack: 10
 };
 
-const money = n => Number(n || 0).toLocaleString('en-US',{style:'currency',currency:'USD'});
+const money = n => Number(n || 0).toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:2});
 
 function setupMenu(){
   const btn=document.querySelector('.menu-toggle');
@@ -26,10 +67,15 @@ function setupMenu(){
     const open=nav.classList.toggle('open');
     btn.setAttribute('aria-expanded',String(open));
   });
-  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');btn.setAttribute('aria-expanded','false')}));
+  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    nav.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+  }));
 }
 
-function setYear(){document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().getFullYear())}
+function setYear(){
+  document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());
+}
 
 function hydrateLinks(){
   document.querySelectorAll('[data-phone-link]').forEach(a=>a.href=`tel:${ONS.phone}`);
@@ -62,14 +108,29 @@ function setupContactForm(){
   });
 }
 
+function renderLoanTable(){
+  const target=document.querySelector('#loanPriceTable');
+  if(!target)return;
+  const areas=Object.keys(ONS.travel);
+  const rows=Object.entries(ONS.loanPackages).map(([packageName,packageFee])=>{
+    const cells=areas.map(area=>`<td>${money(ONS.travel[area]+packageFee+ONS.notarialFee)}</td>`).join('');
+    return `<tr><td>${packageName}</td>${cells}</tr>`;
+  }).join('');
+  target.innerHTML=`
+    <thead><tr><th>Signing type</th>${areas.map(a=>`<th>${a.replace(' Oʻahu','')}</th>`).join('')}</tr></thead>
+    <tbody>${rows}</tbody>`;
+}
+
 function setupEstimator(){
   const form=document.querySelector('#estimateForm');
   if(!form)return;
+
   const out=document.querySelector('#estimateTotal');
   const lines=document.querySelector('#estimateLines');
   const type=document.querySelector('#serviceType');
   const area=document.querySelector('#serviceArea');
-  const sig=document.querySelector('#notarialActs');
+  const loanWrap=document.querySelector('#loanPackageWrap');
+  const loanPackage=document.querySelector('#loanPackage');
   const timing=document.querySelector('#timing');
   const special=document.querySelector('#special');
   const extra=document.querySelector('#extraTime');
@@ -79,15 +140,37 @@ function setupEstimator(){
   const locationField=document.querySelector('#appointmentLocation');
   const documentField=document.querySelector('#documentType');
 
-  Object.keys(ONS.travel).forEach(k=>area.add(new Option(`${k} — ${money(ONS.travel[k])} standard travel`,k)));
+  Object.entries(ONS.travel).forEach(([k,v])=>area.add(new Option(`${k} — ${money(v)} travel / meeting fee`,k)));
+  Object.entries(ONS.loanPackages).forEach(([k,v])=>loanPackage.add(new Option(`${k} — +${money(v)}`,k)));
   Object.keys(ONS.timing).forEach(k=>timing.add(new Option(`${k}${ONS.timing[k]?` — +${money(ONS.timing[k])}`:''}`,k)));
   Object.keys(ONS.special).forEach(k=>special.add(new Option(`${k}${ONS.special[k]?` — +${money(ONS.special[k])}`:''}`,k)));
 
+  function syncFields(){
+    const isLoan=type.value==='Real Estate / Loan Signing';
+    loanWrap.hidden=!isLoan;
+    loanPackage.required=isLoan;
+  }
+
   function calc(){
-    const isEstate=type.value==='Estate Planning Signing';
-    const base=(isEstate?ONS.estate:ONS.travel)[area.value]||0;
-    const acts=Math.max(1,Number(sig.value||1));
-    const actFee=acts*ONS.notarialAct;
+    syncFields();
+    const selectedType=type.value;
+    let base=0;
+    let notarial=0;
+    let packageFee=0;
+    let baseLabel='Travel / meeting fee';
+
+    if(selectedType==='Estate Planning Signing'){
+      base=ONS.estate[area.value]||0;
+      baseLabel='Estate planning signing';
+    } else if(selectedType==='Real Estate / Loan Signing'){
+      base=ONS.travel[area.value]||0;
+      notarial=ONS.notarialFee;
+      packageFee=ONS.loanPackages[loanPackage.value]||0;
+    } else {
+      base=ONS.travel[area.value]||0;
+      notarial=ONS.notarialFee;
+    }
+
     const timingFee=ONS.timing[timing.value]||0;
     const specialFee=ONS.special[special.value]||0;
     const extraUnits=Math.max(0,Number(extra.value||0));
@@ -95,13 +178,21 @@ function setupEstimator(){
     const printPages=Math.max(0,Number(print.value||0));
     const printFee=printPages*ONS.printing;
     const scanFee=scan.checked?ONS.scanBack:0;
-    const total=base+actFee+timingFee+specialFee+extraFee+printFee+scanFee;
+    const total=base+notarial+packageFee+timingFee+specialFee+extraFee+printFee+scanFee;
+
     out.textContent=money(total);
     const rows=[
-      ['Base / travel',base],['Notarial acts',actFee],['Timing',timingFee],['Special location',specialFee],['Additional time',extraFee],['Printing',printFee],['Scan-back',scanFee]
+      [baseLabel,base],
+      ['Notarial fee',notarial],
+      ['Signing package service',packageFee],
+      ['Timing',timingFee],
+      ['Special location',specialFee],
+      ['Additional time',extraFee],
+      ['Printing',printFee],
+      ['Scan-back',scanFee]
     ].filter(r=>r[1]>0);
     lines.innerHTML=rows.map(([label,val])=>`<div class="quote-line"><span>${label}</span><strong>${money(val)}</strong></div>`).join('');
-    return {total,base,acts,actFee,timingFee,specialFee,extraFee,printFee,scanFee};
+    return {total,base,notarial,packageFee,timingFee,specialFee,extraFee,printFee,scanFee};
   }
 
   form.addEventListener('input',calc);
@@ -110,30 +201,39 @@ function setupEstimator(){
 
   document.querySelector('#sendEstimate')?.addEventListener('click',()=>{
     const q=calc();
+    const packageLine=type.value==='Real Estate / Loan Signing' ? `Signing package: ${loanPackage.value}` : '';
     const body=[
       'Oahu Notary Services appointment estimate request',
       '',
       `Name: ${name.value||''}`,
       `Service: ${type.value}`,
+      packageLine,
       `Document: ${documentField.value||''}`,
       `Location: ${locationField.value||area.value}`,
       `Area: ${area.value}`,
-      `Notarial acts: ${q.acts}`,
       `Timing: ${timing.value}`,
       `Special location: ${special.value}`,
       `Estimated pre-GET total: ${money(q.total)}`,
       '',
-      'I understand this is an estimate only and final pricing/availability must be confirmed.'
-    ].join('\n');
+      'I understand this is an estimate only and final pricing and availability must be confirmed.'
+    ].filter(Boolean).join('\n');
     location.href=`mailto:${ONS.email}?subject=${encodeURIComponent('Estimate Request - Oahu Notary Services')}&body=${encodeURIComponent(body)}`;
   });
 
   document.querySelector('#textEstimate')?.addEventListener('click',e=>{
     e.preventDefault();
     const q=calc();
-    const msg=`Hi Oahu Notary Services! I would like to request an appointment. ${type.value}, ${area.value}, ${q.acts} notarial act(s). Website estimate before applicable GET: ${money(q.total)}. Please confirm final price and availability.`;
+    const pkg=type.value==='Real Estate / Loan Signing' ? `, ${loanPackage.value}` : '';
+    const msg=`Hi Oahu Notary Services! I would like an appointment quote for ${type.value}${pkg}, ${area.value}. The website estimate before applicable GET is ${money(q.total)}. Please confirm final price and availability.`;
     location.href=`sms:${ONS.phone}?&body=${encodeURIComponent(msg)}`;
   });
 }
 
-document.addEventListener('DOMContentLoaded',()=>{setupMenu();setYear();hydrateLinks();setupContactForm();setupEstimator();});
+document.addEventListener('DOMContentLoaded',()=>{
+  setupMenu();
+  setYear();
+  hydrateLinks();
+  setupContactForm();
+  renderLoanTable();
+  setupEstimator();
+});
