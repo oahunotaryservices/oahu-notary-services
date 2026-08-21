@@ -3,10 +3,11 @@ OAHU NOTARY SERVICES — WEBSITE FILES
 Main pages:
 - index.html
 - services.html
-- signings.html
+- estate.html
+- loan-signings.html
+- apostille.html
 - pricing.html
 - estimate.html
-- apostille.html
 - reviews.html
 - contact.html
 - privacy.html
@@ -14,6 +15,10 @@ Main pages:
 Shared design files:
 - assets/css/styles.css
 - assets/js/site.js
+
+Photo assets added:
+- assets/img/home-notary-journal.jpg
+- assets/img/loan-signing-workspace.jpg
 
 Important pricing values are centralized in assets/js/site.js for the estimator and loan-signing matrix.
 
