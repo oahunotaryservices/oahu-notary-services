@@ -1,9 +1,70 @@
 {
+  "id": "/",
   "name": "Oahu Notary Services",
   "short_name": "Oahu Notary",
-  "start_url": "./",
+  "description": "Oahu Notary Services — mobile notary, estate planning signing, loan signing, apostille assistance and related services throughout Oʻahu.",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#f7f3ea",
-  "theme_color": "#1f4a3a",
-  "icons": []
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "background_color": "#F7F3EA",
+  "theme_color": "#1F4A3A",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": [
+    "business",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "assets/img/ons-brand-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/ons-brand-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/ons-brand-icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Get a Fee Estimate",
+      "short_name": "Estimate",
+      "description": "Build a starting appointment estimate.",
+      "url": "/estimate.html",
+      "icons": [
+        {
+          "src": "assets/img/ons-brand-icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Contact Oahu Notary Services",
+      "short_name": "Contact",
+      "description": "Contact Oahu Notary Services.",
+      "url": "/contact.html",
+      "icons": [
+        {
+          "src": "assets/img/ons-brand-icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false
 }

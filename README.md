@@ -6,7 +6,7 @@ Official website files for **Oahu Notary Services**.
 **Phone:** 808-774-6248  
 **Email:** OahuNotaryServices@gmail.com
 
-## Website Pages
+## Main Pages
 
 - `index.html` — Home
 - `services.html` — Services
@@ -14,50 +14,52 @@ Official website files for **Oahu Notary Services**.
 - `loan-signings.html` — Loan Signings
 - `apostille.html` — Apostille Services
 - `pricing.html` — Pricing
-- `estimate.html` — Price Estimate
+- `estimate.html` — Fee Estimate
 - `reviews.html` — Reviews
 - `contact.html` — Contact
 - `privacy.html` — Privacy
 - `404.html` — Not Found page
-- `home/index.html` — Legacy `/home` redirect to the main homepage
+- `home/index.html` — legacy `/home` redirect to the current homepage
 
-## Supporting Files
+## Brand / App Files
 
-- `assets/` — Website images, stylesheets, and scripts
-- `favicon.svg` — Browser icon
-- `manifest.webmanifest` — Installable mobile web-app settings
-- `robots.txt` — Search-engine crawl instructions
-- `sitemap.xml` — Search-engine page list
-- `CNAME` — Custom-domain configuration
+- `assets/img/oahu-notary-logo.png` — website logo
+- `favicon.ico` and branded favicon PNGs — browser-tab icons
+- `assets/img/ons-brand-icon-*.png` — installed mobile web-app icons derived from the existing Oahu Notary Services logo
+- `manifest.webmanifest` — installed mobile web-app name, brand colors, icons and shortcuts
 
-## Current Standard Mobile Pricing
+The installed mobile version opens the live website, so normal published website content changes also appear there. The app icon itself may remain cached on devices that installed an older version; reinstalling the app refreshes the home-screen icon.
 
-Travel / meeting / time fee:
+## Current Visual System
 
-- South Oʻahu — Starting at $65
-- East Oʻahu — Starting at $75
-- Central Oʻahu — Starting at $85
-- West Oʻahu — Starting at $90
-- North Oʻahu — Starting at $125
-
-Notarial fee: $5 per notarization.
-
-## Estate Planning Signing Pricing
-
-- South Oʻahu — $95
-- East Oʻahu — $100
-- Central Oʻahu — $115
-- West Oʻahu — $120
-- North Oʻahu — $150
+- Forest green: `#1F4A3A`
+- Cream / white backgrounds with tan accents
+- Title: Nexa Pro Text when available
+- Heading/Subheading: Utopia when available
+- Body: Noto Sans
+- Square borders throughout cards, forms and sections
+- Rounded corners are reserved for direct Text/Call and Secure Upload buttons
+- Lists use standard bullet points rather than decorative check marks
 
 ## Important Maintenance Notes
 
-When changing pricing, update both the visible pricing pages and the estimate calculator so the amounts stay consistent.
+When changing pricing, update both visible pricing content and the estimate calculator so the amounts remain consistent.
 
-When adding a new public page, also update `sitemap.xml` and the navigation links where appropriate.
+When adding a new public page, update `sitemap.xml` and the navigation where appropriate.
 
-Do not remove `home/index.html`. It preserves the former `/home` address and redirects it to the current homepage.
+Do not remove `home/index.html`; it preserves the former `/home` address and directs it to the current homepage.
 
-Do not remove the `CNAME` file unless the website domain is intentionally being changed.
+Do not remove `CNAME` unless the custom domain is intentionally being changed.
 
-Keep sensitive client documents and private information out of these website files. Use the secure document-upload option provided on the website for client documents.
+Keep sensitive client documents, IDs, passwords and private legal information out of public website files. Use the secure document-upload option for client documents.
+
+
+## Installed App Branding
+
+- App name: **Oahu Notary Services**
+- Home-screen short name: **Oahu Notary**
+- Icon: symbol-only Oahu Notary Services owl/O mark in forest green, white, and tan
+- Launch treatment: branded Oahu Notary Services splash screen
+- Theme color: `#1F4A3A`
+- Background color: warm cream `#F7F3EA`
+- The installed app uses live website content. The service worker uses network-first navigation so published website changes are preferred over cached copies.

@@ -4,151 +4,90 @@ OAHU NOTARY SERVICES — WEBSITE MAINTENANCE NOTES
 Primary website:
 https://www.oahunotaryservices.com
 
-Business contact:
+Phone:
 808-774-6248
+
+Email:
 OahuNotaryServices@gmail.com
 
-
-CURRENT NAVIGATION ORDER
-------------------------
-
-1. Home
-2. Services
-3. Estate Planning
-4. Loan Signings
-5. Apostille
-6. Pricing
-7. Estimate
-8. Reviews
-9. Contact
-
-
-CURRENT STANDARD MOBILE PRICING
--------------------------------
-
-Travel / meeting / time fee:
-
-South Oʻahu:   Starting at $65
-East Oʻahu:    Starting at $75
-Central Oʻahu: Starting at $85
-West Oʻahu:    Starting at $90
-North Oʻahu:   Starting at $125
-
-Notarial fee:
-$5 per notarization
-
-
-ESTATE PLANNING SIGNING PRICING
--------------------------------
-
-South Oʻahu:   $95
-East Oʻahu:    $100
-Central Oʻahu: $115
-West Oʻahu:    $120
-North Oʻahu:   $150
-
-
-ADDITIONAL FEES CURRENTLY USED
-------------------------------
-
-Same-day / less than 24 hours: +$50
-Peak traffic, Monday-Friday, 4:00 PM-7:00 PM: +$25
-Late-hour appointments, 8:00 PM-8:00 AM: +$50
-State or federal holiday: +$50
-Hospital / care facility appointments: Starting at $95
-Correctional facility appointments: Starting at $150
-
-Hawaiʻi GET (4.712%) is added to applicable fees.
-
-
-IMPORTANT FILES
----------------
-
-index.html
-Main homepage.
-
-services.html
-General services page.
-
-estate.html
-Dedicated Estate Planning Signings page.
-
-loan-signings.html
-Dedicated Loan Signings page.
-
-pricing.html
-Main pricing page.
-
-estimate.html
-Interactive estimate page. Pricing changes should also be checked here.
-
-reviews.html
-Contains the live Google and Yelp review widgets.
-
-home/index.html
-Legacy redirect for the former /home address.
-KEEP THIS FILE.
-
-robots.txt
-Search-engine crawl instructions.
-
-sitemap.xml
-List of public pages for search engines. Update when adding or removing public pages.
-
-manifest.webmanifest
-Controls the installable mobile version of the website, including app name, icon, and display behavior.
-
-CNAME
-Connects the custom domain to the website.
-KEEP THIS FILE unless the domain itself is being changed.
-
-
-SEARCH / SEO NOTES
+CURRENT NAVIGATION
 ------------------
+Home
+Services
+Estate Planning
+Loan Signings
+Apostille
+Pricing
+Estimate
+Reviews
+Contact
 
+CURRENT BRAND / VISUAL RULES
+----------------------------
+Primary green: #1F4A3A
+Cream / white backgrounds with tan accents.
+
+Typography:
+Title — Nexa Pro Text when available
+Heading — Bold Utopia when available
+Subheading — Utopia when available
+Body — Noto Sans
+
+Cards, forms, image frames, pricing boxes, notices and page sections use square corners.
+Only direct Text/Call action buttons and Secure Upload buttons intentionally use rounded corners.
+Decorative check marks are not used; lists use standard bullet points.
+
+MOBILE WEB-APP / BROWSER ICONS
+------------------------------
+The installed mobile web-app uses icon artwork derived from the owl/O mark in the existing Oahu Notary Services logo.
+The app theme and launch background use #1F4A3A.
+The browser favicon uses the same branded icon system.
+
+Users who previously installed an older version may need to remove and reinstall the web-app before the new home-screen icon appears because phone launchers can cache icons.
+
+CORE FILES
+----------
+index.html — Home
+services.html — Services
+estate.html — Estate Planning Signings
+loan-signings.html — Loan Signings
+apostille.html — Apostille Services
+pricing.html — Pricing
+estimate.html — Fee Estimate
+reviews.html — Reviews
+contact.html — Contact
+privacy.html — Privacy
+home/index.html — legacy /home redirect; keep this file
+robots.txt — crawl instructions
+sitemap.xml — public page list
+manifest.webmanifest — installed mobile web-app settings
+CNAME — custom domain configuration
+
+SEO
+---
 Preferred homepage:
 https://www.oahunotaryservices.com/
 
 Former address:
 https://www.oahunotaryservices.com/home
 
-The /home address should redirect to the preferred homepage.
+The former /home address should continue directing visitors to the preferred homepage.
 
-When a new public page is added:
-1. Add it to the main navigation if appropriate.
-2. Add it to sitemap.xml.
-3. Add a self-referencing canonical URL.
-4. Confirm the page title and meta description.
-5. Test the page on both desktop and mobile.
+PRIVACY
+-------
+Do not store client documents, IDs, passwords, private legal documents, account information or other sensitive information in the public website files.
+Use the secure client-upload link for documents.
 
 
-CONTENT / PRIVACY NOTES
------------------------
+INSTALLED APP BRANDING
+----------------------
 
-Do not place client documents, IDs, private legal documents, passwords, account information, or other sensitive information in the public website files.
+Full app name: Oahu Notary Services
+Short home-screen name: Oahu Notary
+App icon: symbol-only branded owl/O mark
+Theme color: #1F4A3A
+Launch background: #F7F3EA
 
-Use the secure document-upload link on the website for client document submissions.
+The installed app opens the live website. A network-first service worker is used so new website content is preferred when internet access is available.
 
-The website provides notary-related information and services. It should not be written in a way that suggests legal advice is being provided.
-
-
-BRAND NOTES
------------
-
-Primary dark green:
-#1F4A3A
-
-General design direction:
-Professional, local Oʻahu feel
-Cream / white backgrounds
-Dark green accents
-Square-cornered cards and borders
-Clean, easy-to-read layout
-
-Preferred typography:
-Title: Nexa Pro Text
-Heading: Bold Utopia
-Subheading: Utopia
-Body: Noto Sans
-
-If licensed Nexa Pro Text or Utopia webfont files are not available, use the existing fallback fonts rather than distributing unlicensed font files.
+After changing app icon or manifest details, existing Android installations may need to be removed and reinstalled to refresh the icon/name.
