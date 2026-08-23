@@ -229,11 +229,52 @@ function setupEstimator(){
   });
 }
 
+
+
+function isStandaloneApp(){
+  return window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+
+function setupBrandedAppSplash(){
+  if(!isStandaloneApp()) return;
+  try{
+    if(sessionStorage.getItem('onsBrandedSplashShown')==='1') return;
+    sessionStorage.setItem('onsBrandedSplashShown','1');
+  }catch(e){}
+
+  const splash=document.createElement('div');
+  splash.className='ons-app-splash';
+  splash.setAttribute('aria-hidden','true');
+  splash.innerHTML=`
+    <div class="ons-app-splash-inner">
+      <img src="assets/img/ons-brand-icon-192.png?v=20260823d" alt="">
+      <div class="ons-app-splash-name">Oahu Notary Services</div>
+      <div class="ons-app-splash-tagline">Mobile Notary • Oʻahu, Hawaiʻi</div>
+    </div>`;
+  document.body.appendChild(splash);
+
+  const removeSplash=()=>{
+    splash.classList.add('hide');
+    setTimeout(()=>splash.remove(),380);
+  };
+  setTimeout(removeSplash,900);
+}
+
+function registerServiceWorker(){
+  if(!('serviceWorker' in navigator)) return;
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('/service-worker.js?v=20260823d').catch(()=>{});
+  });
+}
+
+
 document.addEventListener('DOMContentLoaded',()=>{
+  setupBrandedAppSplash();
   setupMenu();
   setYear();
   hydrateLinks();
   setupContactForm();
   renderLoanTable();
   setupEstimator();
+  registerServiceWorker();
 });
