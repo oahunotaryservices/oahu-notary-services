@@ -331,3 +331,140 @@ input,select,textarea,button{accent-color:var(--green)}
   letter-spacing:.03em;
 }
 @media(prefers-reduced-motion:reduce){.ons-app-splash{transition:none}}
+
+
+/* Oahu Notary Services refinements — 2026-08-23e */
+/* All clickable buttons are intentionally rounded; content cards and fields stay square. */
+.btn,
+button,
+.menu-toggle,
+.footer-upload-btn,
+.social-link{
+  border-radius:999px!important;
+}
+
+/* Memory aid: 6248 = OAHU on a phone keypad. */
+.phone-memory{
+  display:inline-flex;
+  align-items:flex-start;
+  white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+  line-height:1;
+}
+.phone-prefix{line-height:1.05}
+.phone-last4{
+  display:inline-flex;
+  flex-direction:column;
+  align-items:center;
+  line-height:1.05;
+}
+.phone-oahu{
+  display:block;
+  margin-top:3px;
+  font-family:var(--font-body);
+  font-size:.52em;
+  font-weight:800;
+  letter-spacing:.08em;
+  line-height:1;
+  opacity:.86;
+}
+.btn .phone-memory{align-items:center}
+.btn .phone-oahu{font-size:.50em;margin-top:2px}
+.quick-phone-number .phone-memory{font-size:1em}
+
+/* Make Connect With Us a distinct footer destination. */
+.footer-grid{grid-template-columns:1.2fr .72fr 1fr 1.1fr;gap:28px}
+.footer-contact .footer-upload-btn{
+  display:inline-flex;
+  margin-top:8px;
+  padding:10px 14px;
+  background:var(--sand-light);
+  color:var(--green-dark);
+  border:1px solid rgba(255,255,255,.22);
+  font-size:.86rem;
+}
+.footer-connect{
+  padding:18px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.055);
+}
+.footer-connect .connect-title{margin:0 0 4px!important;font-size:1.18rem}
+.connect-copy{margin:0 0 13px;color:#b9c8c0;font-size:.88rem}
+.social-links{display:grid;gap:8px;margin:0}
+.social-link{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  padding:8px 12px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.07);
+  font-weight:700;
+  text-decoration:none!important;
+}
+.social-link:hover{background:rgba(255,255,255,.13);transform:translateY(-1px)}
+.social-link img{width:24px;height:24px;flex:0 0 24px}
+
+/* Reviews: compact share section with Leave a Review immediately below the heading. */
+.review-share{max-width:760px}
+.review-leave-card{margin-top:8px}
+
+@media(max-width:960px){
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .footer-grid{grid-template-columns:1fr}
+  .social-links{grid-template-columns:1fr}
+}
+
+
+/* Permanent app-install area — visitors can install without waiting for a browser banner. */
+.app-install-section{padding-top:42px;padding-bottom:42px;background:var(--cream)}
+.app-install-card{
+  display:grid;
+  grid-template-columns:150px 1fr;
+  gap:30px;
+  align-items:center;
+  padding:28px;
+  border:1px solid var(--line);
+  background:#fff;
+  box-shadow:0 8px 24px rgba(20,54,43,.05);
+}
+.app-install-brand{
+  display:grid;
+  place-items:center;
+  padding:14px;
+  border:1px solid var(--line);
+  background:var(--sand-light);
+}
+.app-install-brand img{width:118px;height:118px;display:block;object-fit:contain}
+.app-install-copy h2{margin-top:5px;margin-bottom:10px}
+.app-install-copy>p{max-width:790px;color:var(--muted)}
+.app-install-benefits{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 22px;
+  margin:16px 0 0;
+  padding-left:1.2rem;
+  color:#435048;
+  font-size:.92rem;
+}
+.app-install-benefits li::marker{color:var(--green)}
+.app-install-status{margin:10px 0 0;color:var(--green-dark);font-weight:700;font-size:.9rem;min-height:1.35em}
+.app-install-help{
+  margin-top:12px;
+  padding:14px 16px;
+  border:1px solid var(--line);
+  background:var(--sand-light);
+  color:#424b46;
+  font-size:.92rem;
+}
+.app-install-help[hidden]{display:none}
+[data-install-app]:disabled{opacity:.68;cursor:default;transform:none!important}
+@media(max-width:700px){
+  .app-install-card{grid-template-columns:1fr;padding:22px}
+  .app-install-brand{width:148px;margin:0 auto}
+  .app-install-copy{text-align:left}
+  .app-install-benefits{display:block}
+  .app-install-benefits li{margin:7px 0}
+}
