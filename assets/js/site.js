@@ -47,7 +47,6 @@ const ONS = {
 
   special: {
     'None': 0,
-    'Hospital / care facility': 25,
     'Correctional facility': 80,
     'Hotel': 25
   },
@@ -77,8 +76,15 @@ function setYear(){
   document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());
 }
 
+function phoneMemoryMarkup(){
+  return `<span class="phone-memory" aria-label="808-774-6248, OAHU"><span class="phone-prefix">808-774-</span><span class="phone-last4">6248<span class="phone-oahu">(OAHU)</span></span></span>`;
+}
+
 function hydrateLinks(){
-  document.querySelectorAll('[data-phone-link]').forEach(a=>a.href=`tel:${ONS.phone}`);
+  document.querySelectorAll('[data-phone-link]').forEach(a=>{
+    a.href=`tel:${ONS.phone}`;
+    if(a.textContent.trim()==='808-774-6248') a.innerHTML=phoneMemoryMarkup();
+  });
   document.querySelectorAll('[data-text-link]').forEach(a=>a.href=`sms:${ONS.phone}`);
   document.querySelectorAll('[data-email-link]').forEach(a=>a.href=`mailto:${ONS.email}`);
   document.querySelectorAll('[data-upload-link]').forEach(a=>a.href=ONS.uploadUrl);
@@ -231,6 +237,99 @@ function setupEstimator(){
 
 
 
+let onsDeferredInstallPrompt=null;
+
+window.addEventListener('beforeinstallprompt',event=>{
+  event.preventDefault();
+  onsDeferredInstallPrompt=event;
+  document.dispatchEvent(new CustomEvent('ons-install-ready'));
+});
+
+window.addEventListener('appinstalled',()=>{
+  onsDeferredInstallPrompt=null;
+  document.dispatchEvent(new CustomEvent('ons-app-installed'));
+});
+
+function setupAppInstall(){
+  const buttons=[...document.querySelectorAll('[data-install-app]')];
+  if(!buttons.length) return;
+
+  const status=document.querySelector('[data-install-status]');
+  const help=document.querySelector('[data-install-help]');
+  const setButton=(label,disabled=false)=>{
+    buttons.forEach(btn=>{
+      btn.textContent=label;
+      btn.disabled=disabled;
+      btn.setAttribute('aria-disabled',disabled?'true':'false');
+    });
+  };
+  const setStatus=message=>{ if(status) status.textContent=message||''; };
+  const showHelp=html=>{
+    if(!help) return;
+    help.innerHTML=html;
+    help.hidden=false;
+  };
+  const hideHelp=()=>{ if(help){ help.hidden=true; help.innerHTML=''; } };
+
+  if(isStandaloneApp()){
+    setButton('App Installed',true);
+    setStatus('Oahu Notary Services is already installed on this device.');
+    return;
+  }
+
+  const ua=navigator.userAgent||'';
+  const isIOS=/iPhone|iPad|iPod/i.test(ua);
+  const isAndroid=/Android/i.test(ua);
+
+  const markReady=()=>{
+    if(onsDeferredInstallPrompt){
+      setButton('Install Oahu Notary Services');
+      setStatus('Ready to install on this device.');
+      hideHelp();
+    }
+  };
+
+  document.addEventListener('ons-install-ready',markReady);
+  document.addEventListener('ons-app-installed',()=>{
+    setButton('App Installed',true);
+    setStatus('Oahu Notary Services was installed successfully.');
+    hideHelp();
+  });
+
+  buttons.forEach(btn=>btn.addEventListener('click',async()=>{
+    if(isStandaloneApp()){
+      setButton('App Installed',true);
+      setStatus('Oahu Notary Services is already installed on this device.');
+      return;
+    }
+
+    if(onsDeferredInstallPrompt){
+      hideHelp();
+      onsDeferredInstallPrompt.prompt();
+      const choice=await onsDeferredInstallPrompt.userChoice;
+      onsDeferredInstallPrompt=null;
+      if(choice?.outcome==='accepted'){
+        setStatus('Installation started.');
+      } else {
+        setStatus('Installation was not completed. You can use this button again later.');
+      }
+      return;
+    }
+
+    if(isIOS){
+      showHelp('<strong>iPhone / iPad:</strong> Open this site in Safari, tap the <strong>Share</strong> button, choose <strong>Add to Home Screen</strong>, then tap <strong>Add</strong>.');
+    } else if(isAndroid){
+      showHelp('<strong>Android:</strong> Open your browser menu (usually ⋮ or ☰) and choose <strong>Install app</strong>, <strong>Add to Home screen</strong>, or <strong>Add page to</strong>. The wording depends on your browser.');
+    } else {
+      showHelp('<strong>Computer:</strong> Look for an install icon in the address bar, or open your browser menu and choose <strong>Install Oahu Notary Services</strong> or <strong>Install app</strong>.');
+    }
+    setStatus('Your browser did not open an automatic install window, so use the instructions shown below.');
+  }));
+
+  if(onsDeferredInstallPrompt) markReady();
+}
+
+
 function isStandaloneApp(){
   return window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone === true;
 }
@@ -247,7 +346,7 @@ function setupBrandedAppSplash(){
   splash.setAttribute('aria-hidden','true');
   splash.innerHTML=`
     <div class="ons-app-splash-inner">
-      <img src="assets/img/ons-brand-icon-192.png?v=20260823d" alt="">
+      <img src="assets/img/ons-brand-icon-192.png?v=20260823f" alt="">
       <div class="ons-app-splash-name">Oahu Notary Services</div>
       <div class="ons-app-splash-tagline">Mobile Notary • Oʻahu, Hawaiʻi</div>
     </div>`;
@@ -263,13 +362,14 @@ function setupBrandedAppSplash(){
 function registerServiceWorker(){
   if(!('serviceWorker' in navigator)) return;
   window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('/service-worker.js?v=20260823d').catch(()=>{});
+    navigator.serviceWorker.register('/service-worker.js?v=20260823f').catch(()=>{});
   });
 }
 
 
 document.addEventListener('DOMContentLoaded',()=>{
   setupBrandedAppSplash();
+  setupAppInstall();
   setupMenu();
   setYear();
   hydrateLinks();
