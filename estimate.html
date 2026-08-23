@@ -1,49 +1,50 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Fee Estimate | Oahu Notary Services</title><meta name="description" content="Build a starting mobile notary, estate-planning signing, or real-estate and loan signing estimate for Oʻahu."><link rel="canonical" href="https://www.oahunotaryservices.com/estimate.html"><meta name="theme-color" content="#1F4A3A">
-<link rel="icon" href="favicon.ico?v=20260823d" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png?v=20260823d">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png?v=20260823d">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png?v=20260823d">
-<link rel="manifest" href="manifest.webmanifest?v=20260823d">
-<meta name="application-name" content="Oahu Notary Services">
-<meta name="apple-mobile-web-app-title" content="Oahu Notary Services">
-<meta name="msapplication-TileColor" content="#1F4A3A">
-<meta name="msapplication-TileImage" content="assets/img/ons-brand-icon-192.png?v=20260823d">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="stylesheet" href="assets/css/styles.css?v=20260823d"></head><body><a class="skip-link" href="#main">Skip to content</a>
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Fee Estimate | Oahu Notary Services</title><meta content="Build a starting mobile notary, estate-planning signing, or real-estate and loan signing estimate for Oʻahu." name="description"/><link href="https://www.oahunotaryservices.com/estimate.html" rel="canonical"/><meta content="#1F4A3A" name="theme-color"/>
+<link href="favicon.ico?v=20260823f" rel="icon" sizes="any"/>
+<link href="assets/img/favicon-32.png?v=20260823f" rel="icon" sizes="32x32" type="image/png"/>
+<link href="assets/img/favicon-16.png?v=20260823f" rel="icon" sizes="16x16" type="image/png"/>
+<link href="assets/img/apple-touch-icon.png?v=20260823f" rel="apple-touch-icon" sizes="180x180"/>
+<link href="manifest.webmanifest?v=20260823f" rel="manifest"/>
+<meta content="Oahu Notary Services" name="application-name"/>
+<meta content="Oahu Notary Services" name="apple-mobile-web-app-title"/>
+<meta content="#1F4A3A" name="msapplication-TileColor"/>
+<meta content="assets/img/ons-brand-icon-192.png?v=20260823f" name="msapplication-TileImage"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<link href="assets/css/styles.css?v=20260823f" rel="stylesheet"/></head><body><a class="skip-link" href="#main">Skip to content</a>
 <div class="topbar">Starting estimates only • Final pricing and availability are confirmed before scheduling</div>
 <header class="site-header">
-  <div class="container nav">
-    <a class="brand" href="index.html" aria-label="Oahu Notary Services home"><img src="assets/img/oahu-notary-logo.png" alt="Oahu Notary Services"></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mainNav">Menu</button>
-    <nav class="nav-links" id="mainNav" aria-label="Main navigation"><a href="index.html">Home</a><a href="services.html">Services</a><a href="estate.html">Estate Planning</a><a href="loan-signings.html">Loan Signings</a><a href="apostille.html">Apostille</a><a href="pricing.html">Pricing</a><a class="active" href="estimate.html">Estimate</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></nav>
-  </div>
+<div class="container nav">
+<a aria-label="Oahu Notary Services home" class="brand" href="index.html"><img alt="Oahu Notary Services" src="assets/img/oahu-notary-logo.png"/></a>
+<button aria-controls="mainNav" aria-expanded="false" class="menu-toggle" type="button">Menu</button>
+<nav aria-label="Main navigation" class="nav-links" id="mainNav"><a href="index.html">Home</a><a href="services.html">Services</a><a href="estate.html">Estate Planning</a><a href="loan-signings.html">Loan Signings</a><a href="apostille.html">Apostille</a><a href="pricing.html">Pricing</a><a class="active" href="estimate.html">Estimate</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></nav>
+</div>
 </header>
 <main id="main"><section class="page-hero"><div class="container"><div class="breadcrumb"><a href="index.html">Home</a> / Estimate</div><span class="eyebrow">Fee Estimator</span><h1>Build a starting estimate before you contact us.</h1><p class="lede">Choose the service, location and any known extras. The estimator gives you a starting pre-GET number so you have a useful ballpark before scheduling.</p></div></section>
 <section class="section"><div class="container quote-layout"><form class="form-card" id="estimateForm"><h2>Appointment details</h2><div class="form-grid">
-<div class="field"><label for="customerName">Your name</label><input id="customerName" autocomplete="name"></div>
+<div class="field"><label for="customerName">Your name</label><input autocomplete="name" id="customerName"/></div>
 <div class="field"><label for="serviceType">Service type</label><select id="serviceType"><option>Standard Mobile Notary</option><option>Estate Planning Signing</option><option>Real Estate / Loan Signing</option></select></div>
-<div class="field full"><label for="serviceArea">Service area</label><select id="serviceArea" required></select></div>
-<div class="field full" id="loanPackageWrap" hidden><label for="loanPackage">Real estate / loan package</label><select id="loanPackage"><option value="">Select a package type</option></select><small>The package fee is added to the service-area travel / meeting fee.</small></div>
-<div class="field full"><label for="documentType">Document or package type</label><input id="documentType" placeholder="Example: Power of Attorney, trust package, seller package, refinance"></div>
-<div class="field full"><label for="appointmentLocation">Appointment location</label><input id="appointmentLocation" placeholder="Address, city, facility or neighborhood"></div>
+<div class="field full"><label for="serviceArea">Service area</label><select id="serviceArea" required=""></select></div>
+<div class="field full" hidden="" id="loanPackageWrap"><label for="loanPackage">Real estate / loan package</label><select id="loanPackage"><option value="">Select a package type</option></select><small>The package fee is added to the service-area travel / meeting fee.</small></div>
+<div class="field full"><label for="documentType">Document or package type</label><input id="documentType" placeholder="Example: Power of Attorney, trust package, seller package, refinance"/></div>
+<div class="field full"><label for="appointmentLocation">Appointment location</label><input id="appointmentLocation" placeholder="Address, city, facility or neighborhood"/></div>
 <div class="field"><label for="timing">Timing</label><select id="timing"></select></div>
 <div class="field"><label for="special">Special location</label><select id="special"></select></div>
-<div class="field"><label for="extraTime">Additional 30-minute increments</label><input id="extraTime" type="number" min="0" value="0"><small>$10 per additional 30 minutes when applicable.</small></div>
-<div class="field"><label for="printPages">Pages to print</label><input id="printPages" type="number" min="0" value="0"><small>$0.25 per page when printing is requested.</small></div>
-<div class="field full"><label><input id="scanBack" type="checkbox"> Add scan-back service (+$10)</label></div>
-</div><div class="button-row"><button class="btn btn-primary" id="sendEstimate" type="button">Send Estimate by Email</button><a class="btn btn-secondary" id="textEstimate" href="#">Text Estimate</a></div></form>
+<div class="field"><label for="extraTime">Additional 30-minute increments</label><input id="extraTime" min="0" type="number" value="0"/><small>$10 per additional 30 minutes when applicable.</small></div>
+<div class="field"><label for="printPages">Pages to print</label><input id="printPages" min="0" type="number" value="0"/><small>$0.25 per page when printing is requested.</small></div>
+<div class="field full"><label><input id="scanBack" type="checkbox"/> Add scan-back service (+$10)</label></div>
+</div><div class="button-row"><button class="btn btn-primary" id="sendEstimate" type="button">Send Estimate by Email</button><a class="btn btn-secondary" href="#" id="textEstimate">Text Estimate</a></div></form>
 <aside class="quote-summary"><div class="inner"><span class="kicker" style="color:#d6c5a6">Estimate PreTotal</span><h2>Starting estimate</h2><div class="quote-total" id="estimateTotal">$0.00</div><div class="quote-lines" id="estimateLines"></div><div class="quote-note">Hawaiʻi GET is not included in this pre-total. The actual price is confirmed before the appointment is scheduled. Document complexity, package requirements or circumstances discovered after review may change the quote.</div></div></aside>
 </div></section>
 <section class="section alt"><div class="container"><div class="section-head"><span class="eyebrow">Next Step</span><h2 class="compact-heading">Send the estimate and we confirm the real appointment details.</h2><p>The estimator is meant to give you a useful starting number. Final pricing is based on the actual location, document package, timing and services requested.</p></div></div></section>
-<section class="section"><div class="container"><div class="guarantee"><div><span class="kicker" style="color:#d6c5a6">Skip the Calculator</span><h2 class="compact-heading">Don’t want to do all this?</h2><p>Just shoot us a message with a short description of what you have, where you need us to meet you, and when. We’ll get back to you with a number.</p></div><div class="button-row" style="margin-top:0"><a class="btn btn-sand" data-text-link>Text Us</a><a class="btn btn-outline-light" data-upload-link target="_blank" rel="noopener">Secure Upload</a></div></div></div></section>
+<section class="section"><div class="container"><div class="guarantee"><div><span class="kicker" style="color:#d6c5a6">Skip the Calculator</span><h2 class="compact-heading">Don’t want to do all this?</h2><p>Just shoot us a message with a short description of what you have, where you need us to meet you, and when. We’ll get back to you with a number.</p></div><div class="button-row" style="margin-top:0"><a class="btn btn-sand" data-text-link="">Text Us</a><a class="btn btn-outline-light" data-upload-link="" rel="noopener" target="_blank">Secure Upload</a></div></div></div></section>
 </main><footer class="footer"><div class="container"><div class="footer-grid">
-  <div><h3>Oahu Notary Services, LLC</h3><p>Mobile notary and signing services throughout Oʻahu by appointment.</p><small>Not a law firm. No legal advice or legal document preparation.</small></div>
-  <div><h3>Quick Links</h3><p><a href="services.html">Services</a><br><a href="estate.html">Estate Planning</a><br><a href="loan-signings.html">Loan Signings</a><br><a href="apostille.html">Apostille</a><br><a href="pricing.html">Pricing</a><br><a href="estimate.html">Estimator</a></p></div>
-  <div><h3>Contact</h3><p><a data-phone-link>808-774-6248</a><br><a data-email-link>OahuNotaryServices@gmail.com</a><br><a data-upload-link target="_blank" rel="noopener">Secure Client Upload</a></p>
-  <h3 class="connect-title">Connect With Us</h3><p class="social-links"><a href="https://www.facebook.com/OahuNotaryServices" target="_blank" rel="noopener">Facebook</a><span>•</span><a href="https://www.instagram.com/OahuNotaryServices" target="_blank" rel="noopener">Instagram</a><span>•</span><a href="https://www.linkedin.com/company/oahunotaryservices/" target="_blank" rel="noopener">LinkedIn</a></p></div>
-</div><div class="footer-bottom"><span>© 2023–<span data-year>2026</span> Oahu Notary Services, LLC.</span><a href="privacy.html">Privacy</a></div></div></footer>
-<script src="assets/js/site.js?v=20260823d"></script></body></html>
+<div class="footer-brand"><h3>Oahu Notary Services, LLC</h3><p>Mobile notary and signing services throughout Oʻahu by appointment.</p><small>Not a law firm. No legal advice or legal document preparation.</small></div>
+<div><h3>Quick Links</h3><p><a href="services.html">Services</a><br/><a href="estate.html">Estate Planning</a><br/><a href="loan-signings.html">Loan Signings</a><br/><a href="apostille.html">Apostille</a><br/><a href="pricing.html">Pricing</a><br/><a href="estimate.html">Estimator</a><br/><a href="index.html#install-app">Install App</a></p></div>
+<div class="footer-contact"><h3>Contact</h3><p><a data-phone-link="">808-774-6248</a><br/><a data-email-link="">OahuNotaryServices@gmail.com</a></p><a class="btn footer-upload-btn" data-upload-link="" rel="noopener" target="_blank">Secure Client Upload</a></div>
+<div class="footer-connect"><h3 class="connect-title">Connect With Us</h3><p class="connect-copy">Follow Oahu Notary Services</p><div class="social-links"><a class="social-link" href="https://www.facebook.com/OahuNotaryServices" rel="noopener" target="_blank"><img alt="" src="assets/img/social-facebook.svg"/>Facebook</a><a class="social-link" href="https://www.instagram.com/OahuNotaryServices" rel="noopener" target="_blank"><img alt="" src="assets/img/social-instagram.svg"/>Instagram</a><a class="social-link" href="https://www.linkedin.com/company/oahunotaryservices/" rel="noopener" target="_blank"><img alt="" src="assets/img/social-linkedin.svg"/>LinkedIn</a></div></div>
+</div><div class="footer-bottom"><span>© 2023–<span data-year="">2026</span> Oahu Notary Services, LLC.</span><a href="privacy.html">Privacy</a></div></div></footer>
+<script src="assets/js/site.js?v=20260823f"></script></body></html>

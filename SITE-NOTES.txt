@@ -34,7 +34,7 @@ Subheading — Utopia when available
 Body — Noto Sans
 
 Cards, forms, image frames, pricing boxes, notices and page sections use square corners.
-Only direct Text/Call action buttons and Secure Upload buttons intentionally use rounded corners.
+All clickable buttons intentionally use rounded corners. Content cards, pricing boxes, map boxes and form fields remain square.
 Decorative check marks are not used; lists use standard bullet points.
 
 MOBILE WEB-APP / BROWSER ICONS
@@ -91,3 +91,12 @@ Launch background: #F7F3EA
 The installed app opens the live website. A network-first service worker is used so new website content is preferred when internet access is available.
 
 After changing app icon or manifest details, existing Android installations may need to be removed and reinstalled to refresh the icon/name.
+
+
+PERMANENT APP INSTALL AREA
+--------------------------
+
+The Home page contains a dedicated Install Oahu Notary Services section at:
+https://www.oahunotaryservices.com/#install-app
+
+The install button triggers the browser installation prompt when supported. If the browser does not expose an automatic prompt, the section shows instructions for iPhone/iPad, Android, or desktop.

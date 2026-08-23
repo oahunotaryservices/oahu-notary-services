@@ -38,7 +38,7 @@ The installed mobile version opens the live website, so normal published website
 - Heading/Subheading: Utopia when available
 - Body: Noto Sans
 - Square borders throughout cards, forms and sections
-- Rounded corners are reserved for direct Text/Call and Secure Upload buttons
+- All clickable buttons use rounded corners; content cards, pricing boxes and form fields remain square
 - Lists use standard bullet points rather than decorative check marks
 
 ## Important Maintenance Notes
@@ -63,3 +63,8 @@ Keep sensitive client documents, IDs, passwords and private legal information ou
 - Theme color: `#1F4A3A`
 - Background color: warm cream `#F7F3EA`
 - The installed app uses live website content. The service worker uses network-first navigation so published website changes are preferred over cached copies.
+
+
+## Installable App
+
+The Home page includes a permanent **Install Oahu Notary Services** section at `index.html#install-app`. The install button opens the native browser installation prompt when available and provides device-specific instructions when the browser does not expose the prompt.
