@@ -1,11 +1,11 @@
-const CACHE_NAME='ons-pwa-20260823f';
+const CACHE_NAME='ons-pwa-20260823g';
 const CORE=[
   '/',
   '/index.html',
-  '/assets/css/styles.css?v=20260823f',
-  '/assets/js/site.js?v=20260823f',
-  '/assets/img/ons-brand-icon-192.png?v=20260823f',
-  '/assets/img/ons-brand-icon-512.png?v=20260823f'
+  '/assets/css/styles.css?v=20260823g',
+  '/assets/js/site.js?v=20260823g',
+  '/assets/img/ons-brand-icon-192.png?v=20260823g',
+  '/assets/img/ons-brand-icon-512.png?v=20260823g'
 ];
 
 self.addEventListener('install',event=>{
