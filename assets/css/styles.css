@@ -55,7 +55,7 @@ button,input,select,textarea{font:inherit}
 .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);border-bottom:1px solid rgba(31,74,58,.1);backdrop-filter:blur(12px)}
 .nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:18px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:190px}
-.brand img{width:170px;height:auto}
+.brand img{width:190px;height:auto;object-fit:contain}
 .nav-links{display:flex;align-items:center;gap:4px}
 .nav-links a{padding:9px 7px;border-radius:0;text-decoration:none;font-weight:700;font-size:.80rem;color:var(--green-dark)}
 .nav-links a:hover,.nav-links a.active{background:var(--green-soft)}
@@ -194,7 +194,7 @@ h3{font-size:1.3rem}
 
 @media(max-width:1060px){
   .nav-links a{padding:9px 8px;font-size:.82rem}
-  .brand img{width:155px}
+  .brand img{width:175px}
 }
 @media(max-width:960px){
   .nav-links{display:none;position:absolute;left:18px;right:18px;top:86px;background:white;box-shadow:var(--shadow);border:1px solid var(--line);border-radius:0;padding:12px;flex-direction:column;align-items:stretch}
@@ -213,7 +213,7 @@ h3{font-size:1.3rem}
 }
 @media(max-width:640px){
   .container{width:min(calc(100% - 24px),var(--max))}
-  .brand img{width:145px}
+  .brand img{width:168px}
   .hero-grid{padding:44px 0 48px;gap:28px}
   .hero-card img{height:270px}
   .section{padding:56px 0}
@@ -246,7 +246,7 @@ h3{font-size:1.3rem}
 .page-hero-photo-grid{display:grid;grid-template-columns:1fr .82fr;gap:38px;align-items:center}
 .page-photo-card{background:#fff;border:1px solid var(--line);padding:12px;box-shadow:var(--shadow)}
 .page-photo-card img{width:100%;aspect-ratio:16/10;object-fit:cover}
-@media(max-width:1100px){.nav-links a{font-size:.76rem;padding:9px 5px}.brand img{width:150px}}
+@media(max-width:1100px){.nav-links a{font-size:.76rem;padding:9px 5px}.brand img{width:175px}}
 @media(max-width:960px){.home-price-grid{grid-template-columns:repeat(2,1fr)!important}.map-legend{grid-template-columns:repeat(3,1fr)}.page-hero-photo-grid{grid-template-columns:1fr}.page-photo-card{max-width:760px}}
 @media(max-width:640px){.home-hero-photo{height:410px!important}.home-price-grid,.map-legend{grid-template-columns:1fr!important}}
 
@@ -343,34 +343,41 @@ button,
   border-radius:999px!important;
 }
 
-/* Memory aid: 6248 = OAHU on a phone keypad. */
+/* Memory aid: 6248 = OAHU on a phone keypad. Keep all ten digits on one baseline. */
 .phone-memory{
-  display:inline-flex;
-  align-items:flex-start;
+  display:inline-grid;
+  grid-template-columns:auto auto;
+  align-items:baseline;
   white-space:nowrap;
   font-variant-numeric:tabular-nums;
   line-height:1;
+  padding-bottom:.58em;
 }
-.phone-prefix{line-height:1.05}
+.phone-prefix{
+  display:inline-block;
+  line-height:1;
+}
 .phone-last4{
-  display:inline-flex;
-  flex-direction:column;
-  align-items:center;
-  line-height:1.05;
+  display:inline-block;
+  position:relative;
+  line-height:1;
 }
 .phone-oahu{
-  display:block;
-  margin-top:3px;
+  position:absolute;
+  top:calc(100% + 3px);
+  left:50%;
+  transform:translateX(-50%);
+  white-space:nowrap;
   font-family:var(--font-body);
-  font-size:.52em;
+  font-size:.50em;
   font-weight:800;
-  letter-spacing:.08em;
+  letter-spacing:.07em;
   line-height:1;
   opacity:.86;
 }
-.btn .phone-memory{align-items:center}
-.btn .phone-oahu{font-size:.50em;margin-top:2px}
-.quick-phone-number .phone-memory{font-size:1em}
+.btn .phone-memory{padding-bottom:.54em}
+.btn .phone-oahu{font-size:.48em;top:calc(100% + 2px)}
+.quick-phone-number .phone-memory{font-size:1em;padding-bottom:.62em}
 
 /* Make Connect With Us a distinct footer destination. */
 .footer-grid{grid-template-columns:1.2fr .72fr 1fr 1.1fr;gap:28px}
