@@ -1,11 +1,11 @@
-const CACHE_NAME='ons-pwa-20260823g';
+const CACHE_NAME='ons-pwa-20260823h';
 const CORE=[
   '/',
   '/index.html',
-  '/assets/css/styles.css?v=20260823g',
-  '/assets/js/site.js?v=20260823g',
-  '/assets/img/ons-brand-icon-192.png?v=20260823g',
-  '/assets/img/ons-brand-icon-512.png?v=20260823g'
+  '/assets/css/styles.css?v=20260823h',
+  '/assets/js/site.js?v=20260823h',
+  '/assets/img/ons-brand-icon-192.png?v=20260823h',
+  '/assets/img/ons-brand-icon-512.png?v=20260823h'
 ];
 
 self.addEventListener('install',event=>{
@@ -37,15 +37,12 @@ self.addEventListener('fetch',event=>{
   }
 
   event.respondWith(
-    caches.match(req).then(cached=>{
-      const fresh=fetch(req).then(resp=>{
-        if(resp && resp.ok){
-          const copy=resp.clone();
-          caches.open(CACHE_NAME).then(cache=>cache.put(req,copy));
-        }
-        return resp;
-      }).catch(()=>cached);
-      return cached || fresh;
-    })
+    fetch(req).then(resp=>{
+      if(resp && resp.ok){
+        const copy=resp.clone();
+        caches.open(CACHE_NAME).then(cache=>cache.put(req,copy));
+      }
+      return resp;
+    }).catch(()=>caches.match(req))
   );
 });
