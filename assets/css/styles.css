@@ -500,3 +500,58 @@ html,body{max-width:100%;overflow-x:hidden}
   .brand img{width:218px;max-width:100%}
   .hero h1{font-size:clamp(1.95rem,8.4vw,2.4rem)}
 }
+
+
+/* Trust, About, FAQ and policy additions — 2026-09-04 */
+.process-card{position:relative;padding-top:62px}
+.process-step{position:absolute;top:18px;left:22px;width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--green);color:var(--green-dark);font-weight:800;font-family:var(--font-body)}
+.about-preview-grid,.about-page-grid{display:grid;grid-template-columns:minmax(280px,.8fr) 1.2fr;gap:42px;align-items:center}
+.about-preview-photo,.about-page-photo{border:1px solid var(--line);background:#fff;padding:10px}
+.about-preview-photo img,.about-page-photo img{width:100%;height:auto;display:block;object-fit:cover}
+.about-preview-photo img{aspect-ratio:1/1}
+.trust-bullets{margin-top:14px}
+.credential-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px}
+.credential-grid>div{border:1px solid var(--line);padding:16px;background:#fff}
+.credential-grid strong{display:block;color:var(--green-dark);font-family:var(--font-heading);font-size:1.05rem}
+.credential-grid span{display:block;color:var(--muted);font-size:.9rem;margin-top:4px}
+.service-area-text{border-top:1px solid var(--line);margin-top:18px;padding-top:16px}
+.service-area-text h3{font-size:1.05rem;margin-bottom:7px}
+.service-area-text p{font-size:.88rem;color:var(--muted);margin:0}
+.home-reviews{padding-top:58px;padding-bottom:58px}
+.home-review-shell{border:1px solid var(--line);background:#fff;padding:18px;min-height:180px}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}
+.faq-grid details{break-inside:avoid}
+.policy-summary-grid .card{min-height:220px}
+.policy-callout{margin-top:18px;border:1px solid var(--line);background:#fff;padding:20px;display:flex;gap:20px;justify-content:space-between;align-items:center}
+.policy-callout p{margin:0;max-width:780px;color:var(--muted)}
+.policy-page{display:grid;gap:18px;max-width:930px}
+.policy-block{border:1px solid var(--line);padding:26px;background:#fff}
+.policy-block p:last-child{margin-bottom:0}
+.policy-ack{margin-top:8px}
+.checkbox-line{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;color:var(--ink)}
+.checkbox-line input{margin-top:4px;flex:0 0 auto}
+.checkbox-line a{color:var(--green);font-weight:700}
+.footer-bottom{gap:18px;flex-wrap:wrap}
+@media(min-width:961px){
+  .nav-links a{font-size:.75rem;padding-inline:5px}
+}
+@media(max-width:760px){
+  .about-preview-grid,.about-page-grid{grid-template-columns:1fr;gap:24px}
+  .about-preview-photo,.about-page-photo{max-width:470px}
+  .credential-grid{grid-template-columns:1fr}
+  .faq-grid{grid-template-columns:1fr}
+  .policy-callout{align-items:flex-start;flex-direction:column}
+}
+
+/* V5.2 pricing emphasis */
+.notarial-fee-highlight{border-left:4px solid var(--green);background:#f7f3ea}
+.notarial-fee-highlight p{margin:.45rem 0 0;color:var(--muted)}
+
+/* V5.5 competitive Town pricing */
+.town-value-highlight{
+  border-left:4px solid #1F4A3A;
+  padding-left:18px;
+}
+.pricing-competitive-note{
+  margin-top:22px;
+}
