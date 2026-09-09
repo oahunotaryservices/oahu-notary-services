@@ -84,10 +84,24 @@ function phoneMemoryMarkup(){
 function hydrateLinks(){
   document.querySelectorAll('[data-phone-link]').forEach(a=>{
     a.href=`tel:${ONS.phone}`;
-    if(a.textContent.trim()==='808-774-6248') a.innerHTML=phoneMemoryMarkup();
+    if(a.classList.contains('btn')){
+      a.innerHTML=`Call ${phoneMemoryMarkup()}`;
+    } else if(a.textContent.trim()==='808-774-6248'){
+      a.innerHTML=phoneMemoryMarkup();
+    }
   });
-  document.querySelectorAll('[data-text-link]').forEach(a=>a.href=`sms:${ONS.phone}`);
-  document.querySelectorAll('[data-email-link]').forEach(a=>a.href=`mailto:${ONS.email}`);
+  document.querySelectorAll('[data-text-link]').forEach(a=>{
+    a.href=`sms:${ONS.phone}`;
+    if(a.classList.contains('btn')){
+      a.innerHTML=`Text ${phoneMemoryMarkup()}`;
+    }
+  });
+  document.querySelectorAll('[data-email-link]').forEach(a=>{
+    a.href=`mailto:${ONS.email}`;
+    if(a.classList.contains('btn')){
+      a.textContent='Email Us';
+    }
+  });
   document.querySelectorAll('[data-upload-link]').forEach(a=>a.href=ONS.uploadUrl);
   document.querySelectorAll('[data-google-reviews]').forEach(a=>a.href=ONS.googleReviews);
   document.querySelectorAll('[data-yelp-reviews]').forEach(a=>a.href=ONS.yelpReviews);
