@@ -555,3 +555,123 @@ html,body{max-width:100%;overflow-x:hidden}
 .pricing-competitive-note{
   margin-top:22px;
 }
+
+
+/* V5.10 form, button and discounts cleanup */
+:root{--sand-button:#b59663}
+.btn{border-radius:0!important;box-shadow:none!important}
+.btn:hover{transform:translateY(-1px)}
+.btn-contact{background:var(--green)!important;border:1px solid var(--green)!important;color:#fff!important;border-radius:11px!important;box-shadow:none!important}
+.btn-contact:hover{box-shadow:0 12px 22px rgba(20,54,43,.20)!important}
+.btn-upload{background:var(--green)!important;border:1px solid var(--green)!important;color:#fff!important;border-radius:0!important;box-shadow:none!important}
+.btn-upload:hover{box-shadow:0 12px 22px rgba(20,54,43,.20)!important}
+.btn-estimate{background:var(--sand-button)!important;border:1px solid var(--sand-button)!important;color:#fff!important;border-radius:0!important;box-shadow:none!important}
+.btn-estimate:hover{box-shadow:0 12px 22px rgba(20,54,43,.18)!important}
+.button-row.contact-actions{align-items:center}
+.checkbox-line,.checkbox-panel{display:flex!important;align-items:flex-start!important;gap:12px!important;width:100%!important;max-width:100%!important}
+.checkbox-panel{padding:14px 16px;border:1px solid var(--line);background:#fbfcfa}
+.checkbox-line input,.checkbox-panel input{flex:0 0 auto!important;width:18px!important;height:18px!important;margin:2px 0 0 0!important}
+.checkbox-line span,.checkbox-panel span{display:block!important;flex:1 1 auto!important;max-width:none!important;min-width:0!important;color:var(--ink)!important;font-weight:700}
+.checkbox-line small,.checkbox-panel small{display:block!important;margin-top:4px!important;color:var(--muted)!important;font-weight:400!important}
+.checkbox-line a,.checkbox-panel a{color:var(--green)!important;font-weight:800!important}
+.field.full .checkbox-panel,.field.full .checkbox-line{grid-column:1/-1}
+.discounts-grid{display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:18px;margin-top:18px}
+.discount-card{border:1px solid var(--line);background:#fff;padding:22px;box-shadow:0 8px 24px rgba(20,54,43,.05)}
+.discount-card h3{margin-bottom:8px}
+.discount-card p{margin:0;color:var(--muted)}
+.discount-rules{margin-top:18px}
+.form-card .button-row,.quote-summary .button-row{align-items:center}
+.footer-contact .btn{display:none!important}
+@media(max-width:760px){.discounts-grid{grid-template-columns:1fr}}
+
+
+/* V5.11 — one consistent button system across the entire site */
+.btn{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  font-weight:800!important;
+  text-decoration:none!important;
+  color:#fff!important;
+  transition:transform .18s ease, box-shadow .18s ease, filter .18s ease!important;
+  box-shadow:none!important;
+}
+
+/* General actions and contact actions: brand green, slightly rounded */
+.btn-general,
+.btn-contact{
+  background:var(--green)!important;
+  border:1px solid var(--green)!important;
+  color:#fff!important;
+  border-radius:11px!important;
+}
+.btn-general:hover,
+.btn-contact:hover{
+  box-shadow:0 12px 24px rgba(20,54,43,.22)!important;
+  transform:translateY(-1px)!important;
+}
+
+/* Secure Upload: brand green, square */
+.btn-upload{
+  background:var(--green)!important;
+  border:1px solid var(--green)!important;
+  color:#fff!important;
+  border-radius:0!important;
+}
+.btn-upload:hover{
+  box-shadow:0 12px 24px rgba(20,54,43,.22)!important;
+  transform:translateY(-1px)!important;
+}
+
+/* Estimate Fee: brand tan, square */
+.btn-estimate{
+  background:#b59663!important;
+  border:1px solid #b59663!important;
+  color:#fff!important;
+  border-radius:0!important;
+}
+.btn-estimate:hover{
+  box-shadow:0 12px 24px rgba(79,62,34,.20)!important;
+  transform:translateY(-1px)!important;
+}
+
+.button-row.contact-actions{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:12px!important;
+  align-items:center!important;
+}
+
+/* Text and Call buttons show the actual number, so give them enough room. */
+.button-row.contact-actions .btn-contact{
+  min-width:190px;
+}
+.btn-contact .phone-memory{
+  display:inline-grid!important;
+  white-space:nowrap!important;
+  color:#fff!important;
+}
+.btn-contact .phone-oahu{
+  color:#fff!important;
+}
+
+/* Keep general button text white even in dark CTA sections. */
+.cta-band .btn,
+.guarantee .btn{
+  color:#fff!important;
+}
+
+/* Mobile: stack big contact actions cleanly. */
+@media(max-width:640px){
+  .button-row.contact-actions{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    width:100%!important;
+  }
+  .button-row.contact-actions .btn,
+  .btn-contact{
+    width:100%!important;
+    min-width:0!important;
+  }
+}
