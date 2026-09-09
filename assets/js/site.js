@@ -9,7 +9,7 @@ const ONS = {
 
   // Standard mobile pricing: travel / meeting / appointment time.
   travel: {
-    'South Oʻahu': 65,
+    'South Oʻahu': 50,
     'East Oʻahu': 75,
     'Central Oʻahu': 85,
     'West Oʻahu': 90,
@@ -25,7 +25,7 @@ const ONS = {
     'North Oʻahu': 150
   },
 
-  // Notarial fee added to standard and real-estate / loan estimates.
+  // Hawaiʻi statutory notarial fee used by the estimator.
   notarialFee: 5,
 
   loanPackages: {
@@ -39,9 +39,9 @@ const ONS = {
 
   timing: {
     'Standard appointment': 0,
-    'Same-day / less than 24 hours': 50,
-    'Peak traffic, Mon–Fri 4–7 PM': 25,
-    'Late-hour appointment, 9 PM–7 AM': 50,
+    'Short notice, 4–24 hours': 25,
+    'Rush / immediate, less than 4 hours': 50,
+    'Late-night appointment, 10 PM–7 AM': 50,
     'State or federal holiday': 50
   },
 
@@ -53,7 +53,8 @@ const ONS = {
 
   extraTime: 10,
   printing: .25,
-  scanBack: 10
+  scanBack: 10,
+  witnessFee: 25
 };
 
 const money = n => Number(n || 0).toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:2});
@@ -106,7 +107,9 @@ function setupContactForm(){
       `Location: ${fd.get('location')||''}`,
       `Document: ${fd.get('document')||''}`,
       `Number of signers: ${fd.get('signers')||''}`,
-      `Message: ${fd.get('message')||''}`
+      `Witness requested: ${fd.get('witnessRequested')==='Yes' ? 'Please confirm availability for one witness (+$25)' : 'No / client providing own witness(es)'}`,
+      `Message: ${fd.get('message')||''}`,
+      `Policies acknowledged: ${fd.get('policyAck')||'No'}`
     ];
     const subject=encodeURIComponent('Appointment Request - Oahu Notary Services');
     const body=encodeURIComponent(lines.join('\n'));
@@ -142,9 +145,11 @@ function setupEstimator(){
   const extra=document.querySelector('#extraTime');
   const print=document.querySelector('#printPages');
   const scan=document.querySelector('#scanBack');
+  const witnessRequested=document.querySelector('#witnessRequestedEstimate');
   const name=document.querySelector('#customerName');
   const locationField=document.querySelector('#appointmentLocation');
   const documentField=document.querySelector('#documentType');
+  const notarialCount=document.querySelector('#notarialCount');
 
   Object.entries(ONS.travel).forEach(([k,v])=>area.add(new Option(`${k} — ${money(v)} travel / meeting fee`,k)));
   Object.entries(ONS.loanPackages).forEach(([k,v])=>loanPackage.add(new Option(`${k} — +${money(v)}`,k)));
@@ -170,12 +175,13 @@ function setupEstimator(){
       baseLabel='Estate planning signing';
     } else if(selectedType==='Real Estate / Loan Signing'){
       base=ONS.travel[area.value]||0;
-      notarial=ONS.notarialFee;
       packageFee=ONS.loanPackages[loanPackage.value]||0;
     } else {
       base=ONS.travel[area.value]||0;
-      notarial=ONS.notarialFee;
     }
+
+    const notarialUnits=Math.max(0,Number(notarialCount?.value||0));
+    notarial=notarialUnits*ONS.notarialFee;
 
     const timingFee=ONS.timing[timing.value]||0;
     const specialFee=ONS.special[special.value]||0;
@@ -184,21 +190,23 @@ function setupEstimator(){
     const printPages=Math.max(0,Number(print.value||0));
     const printFee=printPages*ONS.printing;
     const scanFee=scan.checked?ONS.scanBack:0;
-    const total=base+notarial+packageFee+timingFee+specialFee+extraFee+printFee+scanFee;
+    const witnessFee=witnessRequested?.checked?ONS.witnessFee:0;
+    const total=base+notarial+packageFee+timingFee+specialFee+extraFee+printFee+scanFee+witnessFee;
 
     out.textContent=money(total);
     const rows=[
       [baseLabel,base],
-      ['Notarial fee',notarial],
+      [`Notarization / signature (${notarialUnits} × $5)`,notarial],
       ['Signing package service',packageFee],
       ['Timing',timingFee],
       ['Special location',specialFee],
       ['Additional time',extraFee],
       ['Printing',printFee],
-      ['Scan-back',scanFee]
+      ['Scan-back',scanFee],
+      ['One witness',witnessFee]
     ].filter(r=>r[1]>0);
     lines.innerHTML=rows.map(([label,val])=>`<div class="quote-line"><span>${label}</span><strong>${money(val)}</strong></div>`).join('');
-    return {total,base,notarial,packageFee,timingFee,specialFee,extraFee,printFee,scanFee};
+    return {total,base,notarial,notarialUnits,packageFee,timingFee,specialFee,extraFee,printFee,scanFee,witnessFee};
   }
 
   form.addEventListener('input',calc);
@@ -217,6 +225,9 @@ function setupEstimator(){
       `Document: ${documentField.value||''}`,
       `Location: ${locationField.value||area.value}`,
       `Area: ${area.value}`,
+      `Notarization / signature count: ${q.notarialUnits}`,
+      `Witness: ${q.witnessFee ? 'Please confirm one witness (+$25)' : 'No witness requested'}`,
+      `Notarial fee subtotal: ${money(q.notarial)}`,
       `Timing: ${timing.value}`,
       `Special location: ${special.value}`,
       `Estimated pre-GET total: ${money(q.total)}`,
@@ -230,7 +241,7 @@ function setupEstimator(){
     e.preventDefault();
     const q=calc();
     const pkg=type.value==='Real Estate / Loan Signing' ? `, ${loanPackage.value}` : '';
-    const msg=`Hi Oahu Notary Services! I would like an appointment quote for ${type.value}${pkg}, ${area.value}. The website estimate before applicable GET is ${money(q.total)}. Please confirm final price and availability.`;
+    const msg=`Hi Oahu Notary Services! I would like an appointment quote for ${type.value}${pkg}, ${area.value}, with ${q.notarialUnits} notarization/signature item(s). The website estimate before applicable GET is ${money(q.total)}. Please confirm final price and availability.`;
     location.href=`sms:${ONS.phone}?&body=${encodeURIComponent(msg)}`;
   });
 }
