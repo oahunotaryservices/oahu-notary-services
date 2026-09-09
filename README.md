@@ -68,3 +68,32 @@ Keep sensitive client documents, IDs, passwords and private legal information ou
 ## Installable App
 
 The Home page includes a permanent **Install Oahu Notary Services** section at `index.html#install-app`. The install button opens the native browser installation prompt when available and provides device-specific instructions when the browser does not expose the prompt.
+
+
+## September 2026 Trust & Policy Update
+
+- Added `about.html` with owner photo, credentials, E&O coverage, background-screening and trust information.
+- Added `policies.html` covering payment, cancellation/rescheduling/no-show, refunds, client responsibility and limitation of responsibility.
+- Added general FAQs, a three-step How It Works section, local service-area text, and a live Google review preview on Home.
+- Added LocalBusiness structured data and new sitemap entries.
+- Added policy acknowledgement to the contact form.
+- `assets/img/stacey-oahu-notary.jpg` is the exact user-provided owner photo.
+- IMPORTANT: this package intentionally does NOT include `assets/img/oahu-notary-logo.png`. Keep the exact logo file already in the live repository; uploading this package over the existing files will leave it unchanged.
+
+
+## Witness Availability
+
+Clients are encouraged to provide their own qualified witness(es). If a required witness cannot be provided by the client, they may ask about availability when scheduling. Oahu Notary Services may be able to arrange one witness for an additional $25 by advance request, subject to availability and document requirements. Availability is not guaranteed.
+
+
+## V5.5 Pricing Update
+
+- Town / South Oʻahu standard mobile travel / meeting fee starts at $50.
+- Notarization / signature fee remains $5 each.
+- A simple Town appointment with one notarized signature starts at $55 before applicable Hawaiʻi GET.
+- Short notice (4–24 hours): +$25.
+- Rush / immediate (less than 4 hours): +$50; not stacked with short notice.
+- Late-night appointments: +$50 from 10 PM–7 AM.
+- Automatic Monday–Friday 4–7 PM peak-traffic surcharge removed.
+- No automatic weekend surcharge.
+- Exact travel pricing and any unusual access/parking adjustment are confirmed before booking.

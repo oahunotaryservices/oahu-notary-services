@@ -100,3 +100,13 @@ The Home page contains a dedicated Install Oahu Notary Services section at:
 https://www.oahunotaryservices.com/#install-app
 
 The install button triggers the browser installation prompt when supported. If the browser does not expose an automatic prompt, the section shows instructions for iPhone/iPad, Android, or desktop.
+
+
+SEPTEMBER 2026 UPDATE
+---------------------
+New public pages: about.html, policies.html
+New owner photo: assets/img/stacey-oahu-notary.jpg
+Keep the existing exact assets/img/oahu-notary-logo.png file in the repository. This package intentionally does not overwrite it.
+Cancellation/rescheduling: 3-hour notice; less than 3 hours/no-show may be $30.
+Payments: Cash, Check, Card via Square and/or PayPal, Venmo.
+Refund policy: payments final/non-refundable subject to rights that cannot legally be waived.
