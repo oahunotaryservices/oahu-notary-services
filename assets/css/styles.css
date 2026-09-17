@@ -853,3 +853,105 @@ html,body{max-width:100%;overflow-x:hidden}
 @media(max-width:960px){
   .estimate-highlight{position:static}
 }
+
+
+/* V5.16 calculator reliability + pricing refresh */
+[hidden]{display:none!important}
+
+.estimate-highlight{
+  border:3px solid var(--green)!important;
+  background:#fff!important;
+  box-shadow:0 18px 42px rgba(20,54,43,.16)!important;
+  padding:0!important;
+  overflow:hidden;
+}
+.estimate-highlight .kicker{
+  display:block!important;
+  margin:0!important;
+  padding:12px 18px!important;
+  background:var(--green)!important;
+  color:#fff!important;
+  letter-spacing:.10em!important;
+}
+.estimate-highlight h2{
+  padding:18px 18px 0!important;
+  margin-bottom:4px!important;
+}
+.estimate-highlight .quote-total,
+.estimate-highlight .service-estimate-total{
+  margin:0!important;
+  padding:4px 18px 14px!important;
+  font:700 clamp(2.8rem,7vw,4.4rem) var(--font-heading)!important;
+  color:var(--green-dark)!important;
+  background:var(--sand-light)!important;
+}
+.estimate-highlight .quote-lines,
+.estimate-highlight .service-estimate-lines{
+  padding:14px 18px 6px!important;
+  border-top:0!important;
+}
+.estimate-highlight .estimate-line,
+.estimate-highlight .quote-line{
+  display:flex!important;
+  justify-content:space-between!important;
+  gap:16px!important;
+  padding:9px 0!important;
+  border-bottom:1px solid var(--line)!important;
+  color:var(--ink)!important;
+}
+.estimate-highlight .quote-note,
+.estimate-highlight>p{
+  margin:12px 18px 18px!important;
+  padding:13px 14px!important;
+  background:#f7f3ea!important;
+  color:#4a493f!important;
+}
+@media(max-width:1100px){
+  .service-estimator-layout,
+  .quote-layout{
+    grid-template-columns:1fr!important;
+  }
+  .estimate-highlight{
+    position:static!important;
+  }
+}
+
+
+/* V5.17 — discounts moved directly above ZIP-code service map */
+.pricing-discount-block{
+  margin:30px 0 24px;
+  padding:24px;
+  border:2px solid var(--sand);
+  background:#fbf7ef;
+  box-shadow:0 10px 28px rgba(20,54,43,.07);
+}
+.pricing-discount-block .section-head{
+  margin-bottom:18px;
+}
+.pricing-discount-block .section-head h2{
+  margin-bottom:8px;
+}
+.pricing-discount-block .section-head p{
+  margin-bottom:0;
+}
+.pricing-discount-block .discounts-grid{
+  margin-top:0;
+}
+.pricing-discount-block .discount-card{
+  background:#fff;
+  border:1px solid #ded7c9;
+}
+.pricing-discount-block .discount-rules{
+  margin-top:18px;
+}
+.discount-mention-note{
+  margin:12px 0 0;
+  font-weight:800;
+  color:var(--green-dark);
+}
+@media(max-width:760px){
+  .pricing-discount-block{
+    padding:18px;
+    margin:24px 0 20px;
+  }
+}
