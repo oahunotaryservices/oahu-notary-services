@@ -46,7 +46,8 @@ const ONS = {
   },
 
   special: {
-    'None': 0,
+    'Regular location / home / office': 0,
+    'Hospital / care facility': 0,
     'Correctional facility': 80,
     'Hotel': 25
   },
@@ -154,73 +155,93 @@ function setupEstimator(){
   const area=document.querySelector('#serviceArea');
   const loanWrap=document.querySelector('#loanPackageWrap');
   const loanPackage=document.querySelector('#loanPackage');
+  const notarialCount=document.querySelector('#notarialCount');
+  const witnessChoice=document.querySelector('#witnessChoice');
   const timing=document.querySelector('#timing');
   const special=document.querySelector('#special');
-  const extra=document.querySelector('#extraTime');
   const print=document.querySelector('#printPages');
   const scan=document.querySelector('#scanBack');
-  const witnessRequested=document.querySelector('#witnessRequestedEstimate');
-  const name=document.querySelector('#customerName');
   const locationField=document.querySelector('#appointmentLocation');
-  const documentField=document.querySelector('#documentType');
-  const notarialCount=document.querySelector('#notarialCount');
+  const estateNote=document.querySelector('#estateEstimateNote');
 
-  Object.entries(ONS.travel).forEach(([k,v])=>area.add(new Option(`${k} — ${money(v)} travel / meeting fee`,k)));
-  Object.entries(ONS.loanPackages).forEach(([k,v])=>loanPackage.add(new Option(`${k} — +${money(v)}`,k)));
-  Object.keys(ONS.timing).forEach(k=>timing.add(new Option(`${k}${ONS.timing[k]?` — +${money(ONS.timing[k])}`:''}`,k)));
-  Object.keys(ONS.special).forEach(k=>special.add(new Option(`${k}${ONS.special[k]?` — +${money(ONS.special[k])}`:''}`,k)));
+  Object.entries(ONS.travel).forEach(([k,v])=>{
+    const label=k==='South Oʻahu'
+      ? `Town / South Oʻahu — from ${money(v)}`
+      : `${k} — ${money(v)}`;
+    area.add(new Option(label,k));
+  });
+
+  Object.entries(ONS.loanPackages).forEach(([k,v])=>{
+    loanPackage.add(new Option(`${k} — +${money(v)}`,k));
+  });
+
+  Object.keys(ONS.timing).forEach(k=>{
+    timing.add(new Option(`${k}${ONS.timing[k]?` — +${money(ONS.timing[k])}`:''}`,k));
+  });
+
+  Object.keys(ONS.special).forEach(k=>{
+    special.add(new Option(`${k}${ONS.special[k]?` — +${money(ONS.special[k])}`:''}`,k));
+  });
 
   function syncFields(){
     const isLoan=type.value==='Real Estate / Loan Signing';
+    const isEstate=type.value==='Estate Planning Signing';
     loanWrap.hidden=!isLoan;
     loanPackage.required=isLoan;
+    if(estateNote) estateNote.hidden=!isEstate;
   }
 
   function calc(){
     syncFields();
+
     const selectedType=type.value;
     let base=0;
-    let notarial=0;
-    let packageFee=0;
     let baseLabel='Travel / meeting fee';
+    let packageFee=0;
 
     if(selectedType==='Estate Planning Signing'){
       base=ONS.estate[area.value]||0;
-      baseLabel='Estate planning signing';
-    } else if(selectedType==='Real Estate / Loan Signing'){
-      base=ONS.travel[area.value]||0;
-      packageFee=ONS.loanPackages[loanPackage.value]||0;
-    } else {
+      baseLabel='Estate-planning signing';
+    }else{
       base=ONS.travel[area.value]||0;
     }
 
-    const notarialUnits=Math.max(0,Number(notarialCount?.value||0));
-    notarial=notarialUnits*ONS.notarialFee;
+    if(selectedType==='Real Estate / Loan Signing'){
+      packageFee=ONS.loanPackages[loanPackage.value]||0;
+    }
 
+    const notarialUnits=Math.max(0,Number(notarialCount?.value||0));
+    const notarial=notarialUnits*ONS.notarialFee;
+
+    const witnessFee=witnessChoice?.value==='25' ? ONS.witnessFee : 0;
     const timingFee=ONS.timing[timing.value]||0;
     const specialFee=ONS.special[special.value]||0;
-    const extraUnits=Math.max(0,Number(extra.value||0));
-    const extraFee=extraUnits*ONS.extraTime;
-    const printPages=Math.max(0,Number(print.value||0));
+    const printPages=Math.max(0,Number(print?.value||0));
     const printFee=printPages*ONS.printing;
-    const scanFee=scan.checked?ONS.scanBack:0;
-    const witnessFee=witnessRequested?.checked?ONS.witnessFee:0;
-    const total=base+notarial+packageFee+timingFee+specialFee+extraFee+printFee+scanFee+witnessFee;
+    const scanFee=scan?.checked?ONS.scanBack:0;
 
+    const total=base+notarial+packageFee+witnessFee+timingFee+specialFee+printFee+scanFee;
     out.textContent=money(total);
+
     const rows=[
       [baseLabel,base],
-      [`Notarization / signature (${notarialUnits} × $5)`,notarial],
-      ['Signing package service',packageFee],
+      [`Notarized signature${notarialUnits===1?'':'s'} (${notarialUnits} × $5)`,notarial],
+      ['Loan / real-estate package',packageFee],
+      ['One witness',witnessFee],
       ['Timing',timingFee],
       ['Special location',specialFee],
-      ['Additional time',extraFee],
       ['Printing',printFee],
-      ['Scan-back',scanFee],
-      ['One witness',witnessFee]
+      ['Scan-back',scanFee]
     ].filter(r=>r[1]>0);
-    lines.innerHTML=rows.map(([label,val])=>`<div class="quote-line"><span>${label}</span><strong>${money(val)}</strong></div>`).join('');
-    return {total,base,notarial,notarialUnits,packageFee,timingFee,specialFee,extraFee,printFee,scanFee,witnessFee};
+
+    lines.innerHTML=rows.map(([label,val])=>
+      `<div class="quote-line"><span>${label}</span><strong>${money(val)}</strong></div>`
+    ).join('');
+
+    return {
+      total,base,baseLabel,notarial,notarialUnits,packageFee,witnessFee,
+      timingFee,specialFee,printFee,scanFee
+    };
   }
 
   form.addEventListener('input',calc);
@@ -229,37 +250,289 @@ function setupEstimator(){
 
   document.querySelector('#sendEstimate')?.addEventListener('click',()=>{
     const q=calc();
-    const packageLine=type.value==='Real Estate / Loan Signing' ? `Signing package: ${loanPackage.value}` : '';
+    const packageLine=type.value==='Real Estate / Loan Signing'
+      ? `Loan / real-estate package: ${loanPackage.value||'Not selected'}`
+      : '';
+
+    const witnessLine=witnessChoice?.value==='25'
+      ? 'Witnesses: Please confirm availability for one witness (+$25)'
+      : witnessChoice?.value==='client'
+        ? 'Witnesses: Client will provide required witness(es)'
+        : 'Witnesses: No witness needed / not sure';
+
     const body=[
-      'Oahu Notary Services appointment estimate request',
+      'Oahu Notary Services quick estimate request',
       '',
-      `Name: ${name.value||''}`,
       `Service: ${type.value}`,
       packageLine,
-      `Document: ${documentField.value||''}`,
-      `Location: ${locationField.value||area.value}`,
-      `Area: ${area.value}`,
-      `Notarization / signature count: ${q.notarialUnits}`,
-      `Witness: ${q.witnessFee ? 'Please confirm one witness (+$25)' : 'No witness requested'}`,
-      `Notarial fee subtotal: ${money(q.notarial)}`,
+      `Appointment area: ${area.value}`,
+      `Appointment location: ${locationField.value||'Not provided'}`,
+      `Notarized signatures: ${q.notarialUnits}`,
+      witnessLine,
       `Timing: ${timing.value}`,
-      `Special location: ${special.value}`,
+      `Location type: ${special.value}`,
       `Estimated pre-GET total: ${money(q.total)}`,
       '',
-      'I understand this is an estimate only and final pricing and availability must be confirmed.'
+      'I understand this is a starting estimate only and the final fee will be confirmed before booking.'
     ].filter(Boolean).join('\n');
-    location.href=`mailto:${ONS.email}?subject=${encodeURIComponent('Estimate Request - Oahu Notary Services')}&body=${encodeURIComponent(body)}`;
+
+    location.href=`mailto:${ONS.email}?subject=${encodeURIComponent('Quick Estimate Request - Oahu Notary Services')}&body=${encodeURIComponent(body)}`;
   });
 
   document.querySelector('#textEstimate')?.addEventListener('click',e=>{
     e.preventDefault();
     const q=calc();
-    const pkg=type.value==='Real Estate / Loan Signing' ? `, ${loanPackage.value}` : '';
-    const msg=`Hi Oahu Notary Services! I would like an appointment quote for ${type.value}${pkg}, ${area.value}, with ${q.notarialUnits} notarization/signature item(s). The website estimate before applicable GET is ${money(q.total)}. Please confirm final price and availability.`;
+    const witnessText=witnessChoice?.value==='25'
+      ? ', and I need to ask about one witness'
+      : '';
+
+    const msg=`Hi Oahu Notary Services! I used the quick estimator for ${type.value} in ${area.value}${witnessText}. It shows a starting estimate of ${money(q.total)} before GET. Please confirm the final price and availability.`;
+
     location.href=`sms:${ONS.phone}?&body=${encodeURIComponent(msg)}`;
   });
 }
 
+
+
+
+function fillAreaSelect(select, source, useTownLabel=true){
+  if(!select)return;
+  select.innerHTML='';
+  Object.entries(source).forEach(([name,value])=>{
+    const label=(useTownLabel && name==='South Oʻahu') ? `Town / South Oʻahu — ${money(value)}` : `${name} — ${money(value)}`;
+    select.add(new Option(label,name));
+  });
+}
+
+function fillTimingSelect(select){
+  if(!select)return;
+  select.innerHTML='';
+  Object.keys(ONS.timing).forEach(name=>{
+    const fee=ONS.timing[name];
+    select.add(new Option(`${name}${fee?` — +${money(fee)}`:''}`,name));
+  });
+}
+
+function fillSpecialSelect(select){
+  if(!select)return;
+  select.innerHTML='';
+  Object.keys(ONS.special).forEach(name=>{
+    const fee=ONS.special[name];
+    select.add(new Option(`${name}${fee?` — +${money(fee)}`:''}`,name));
+  });
+}
+
+function renderServiceEstimate(linesEl,totalEl,rows,total){
+  if(totalEl) totalEl.textContent=money(total);
+  if(linesEl){
+    linesEl.innerHTML=rows.filter(r=>r[1]>0).map(([label,value])=>
+      `<div class="quote-line"><span>${label}</span><strong>${money(value)}</strong></div>`
+    ).join('');
+  }
+}
+
+function setupEstateEstimator(){
+  const form=document.querySelector('#estateEstimatorForm');
+  if(!form)return;
+
+  const area=document.querySelector('#estateArea');
+  const count=document.querySelector('#estateNotarialCount');
+  const witness=document.querySelector('#estateWitness');
+  const timing=document.querySelector('#estateTiming');
+  const locationType=document.querySelector('#estateLocationType');
+  const totalEl=document.querySelector('#estateEstimateTotal');
+  const linesEl=document.querySelector('#estateEstimateLines');
+
+  fillAreaSelect(area,ONS.estate);
+  fillTimingSelect(timing);
+  fillSpecialSelect(locationType);
+
+  function calc(){
+    const base=ONS.estate[area.value]||0;
+    const units=Math.max(0,Number(count.value||0));
+    const notarial=units*ONS.notarialFee;
+    const witnessFee=witness.value==='25'?ONS.witnessFee:0;
+    const timingFee=ONS.timing[timing.value]||0;
+    const specialFee=ONS.special[locationType.value]||0;
+    const total=base+notarial+witnessFee+timingFee+specialFee;
+
+    renderServiceEstimate(linesEl,totalEl,[
+      ['Estate-planning signing',base],
+      [`Notarized signature${units===1?'':'s'} (${units} × $5)`,notarial],
+      ['One witness',witnessFee],
+      ['Timing',timingFee],
+      ['Location type',specialFee]
+    ],total);
+
+    return {total,units};
+  }
+
+  form.addEventListener('input',calc);
+  form.addEventListener('change',calc);
+  calc();
+
+  document.querySelector('#estateEstimateEmail')?.addEventListener('click',e=>{
+    e.preventDefault();
+    const q=calc();
+    const witnessText=witness.value==='25'?'Please confirm availability for one witness (+$25)':witness.value==='client'?'Client will provide witness(es)':'No witness needed / not sure';
+    const body=[
+      'Estate-planning signing estimate request',
+      '',
+      `Area: ${area.value}`,
+      `Notarized signatures: ${q.units}`,
+      `Witnesses: ${witnessText}`,
+      `Timing: ${timing.value}`,
+      `Location type: ${locationType.value}`,
+      `Website starting estimate before GET: ${money(q.total)}`,
+      '',
+      'Please confirm the final fee after reviewing the package.'
+    ].join('\n');
+    location.href=`mailto:${ONS.email}?subject=${encodeURIComponent('Estate Planning Signing Estimate')}&body=${encodeURIComponent(body)}`;
+  });
+
+  document.querySelector('#estateEstimateText')?.addEventListener('click',e=>{
+    e.preventDefault();
+    const q=calc();
+    const msg=`Hi Oahu Notary Services! I used the Estate Planning estimator for ${area.value}. It shows ${money(q.total)} before GET. Please confirm the final fee after reviewing the package.`;
+    location.href=`sms:${ONS.phone}?&body=${encodeURIComponent(msg)}`;
+  });
+}
+
+function setupLoanEstimator(){
+  const form=document.querySelector('#loanEstimatorForm');
+  if(!form)return;
+
+  const area=document.querySelector('#loanAreaQuick');
+  const packageType=document.querySelector('#loanPackageQuick');
+  const count=document.querySelector('#loanNotarialCountQuick');
+  const timing=document.querySelector('#loanTimingQuick');
+  const printPages=document.querySelector('#loanPrintPagesQuick');
+  const scan=document.querySelector('#loanScanBackQuick');
+  const totalEl=document.querySelector('#loanEstimateTotal');
+  const linesEl=document.querySelector('#loanEstimateLines');
+
+  fillAreaSelect(area,ONS.travel);
+  fillTimingSelect(timing);
+
+  packageType.innerHTML='';
+  Object.entries(ONS.loanPackages).forEach(([name,value])=>{
+    packageType.add(new Option(`${name} — +${money(value)}`,name));
+  });
+
+  function calc(){
+    const travel=ONS.travel[area.value]||0;
+    const packageFee=ONS.loanPackages[packageType.value]||0;
+    const units=Math.max(0,Number(count.value||0));
+    const notarial=units*ONS.notarialFee;
+    const timingFee=ONS.timing[timing.value]||0;
+    const pages=Math.max(0,Number(printPages.value||0));
+    const printing=pages*ONS.printing;
+    const scanFee=scan.checked?ONS.scanBack:0;
+    const total=travel+packageFee+notarial+timingFee+printing+scanFee;
+
+    renderServiceEstimate(linesEl,totalEl,[
+      ['Travel / meeting',travel],
+      ['Signing package',packageFee],
+      [`Notarized signature${units===1?'':'s'} (${units} × $5)`,notarial],
+      ['Timing',timingFee],
+      ['Printing',printing],
+      ['Scan-back',scanFee]
+    ],total);
+
+    return {total,units,pages};
+  }
+
+  form.addEventListener('input',calc);
+  form.addEventListener('change',calc);
+  calc();
+
+  document.querySelector('#loanEstimateEmail')?.addEventListener('click',e=>{
+    e.preventDefault();
+    const q=calc();
+    const body=[
+      'Loan / real-estate signing estimate request',
+      '',
+      `Area: ${area.value}`,
+      `Package: ${packageType.value}`,
+      `Notarized signatures: ${q.units}`,
+      `Timing: ${timing.value}`,
+      `Printing pages: ${q.pages}`,
+      `Scan-back: ${scan.checked?'Yes':'No'}`,
+      `Website starting estimate before GET: ${money(q.total)}`,
+      '',
+      'Please confirm the final fee and assignment requirements.'
+    ].join('\n');
+    location.href=`mailto:${ONS.email}?subject=${encodeURIComponent('Loan Signing Estimate')}&body=${encodeURIComponent(body)}`;
+  });
+
+  document.querySelector('#loanEstimateText')?.addEventListener('click',e=>{
+    e.preventDefault();
+    const q=calc();
+    const msg=`Hi Oahu Notary Services! I used the Loan Signing estimator for ${packageType.value} in ${area.value}. It shows ${money(q.total)} before GET. Please confirm the final fee and availability.`;
+    location.href=`sms:${ONS.phone}?&body=${encodeURIComponent(msg)}`;
+  });
+}
+
+function setupApostilleQuoteBuilder(){
+  const form=document.querySelector('#apostilleQuoteForm');
+  if(!form)return;
+
+  const docType=document.querySelector('#apostilleDocType');
+  const count=document.querySelector('#apostilleDocCount');
+  const country=document.querySelector('#apostilleCountry');
+  const currentForm=document.querySelector('#apostilleForm');
+  const level=document.querySelector('#apostilleLevel');
+  const returnMethod=document.querySelector('#apostilleReturn');
+  const deadline=document.querySelector('#apostilleDeadline');
+  const status=document.querySelector('#apostilleQuoteStatus');
+  const summary=document.querySelector('#apostilleQuoteSummary');
+
+  function update(){
+    const rows=[
+      ['Document',docType.value],
+      ['Number of documents',String(Math.max(1,Number(count.value||1)))],
+      ['Destination country',country.value.trim()||'Not entered yet'],
+      ['Current document',currentForm.value],
+      ['Assistance requested',level.value],
+      ['Return / delivery',returnMethod.value],
+      ['Deadline',deadline.value.trim()||'Not entered yet']
+    ];
+
+    summary.innerHTML=rows.map(([label,value])=>
+      `<div class="apostille-summary-line"><span>${label}</span><strong>${value}</strong></div>`
+    ).join('');
+
+    status.textContent=(country.value.trim() && docType.value)
+      ? 'Ready to send for a quote'
+      : 'Add the destination country to complete the request';
+
+    return rows;
+  }
+
+  form.addEventListener('input',update);
+  form.addEventListener('change',update);
+  update();
+
+  document.querySelector('#apostilleQuoteEmail')?.addEventListener('click',e=>{
+    e.preventDefault();
+    const rows=update();
+    const body=[
+      'Apostille / authentication assistance quote request',
+      '',
+      ...rows.map(([label,value])=>`${label}: ${value}`),
+      '',
+      'Please let me know what current government processing steps may apply and provide a service quote.'
+    ].join('\n');
+    location.href=`mailto:${ONS.email}?subject=${encodeURIComponent('Apostille Assistance Quote Request')}&body=${encodeURIComponent(body)}`;
+  });
+
+  document.querySelector('#apostilleQuoteText')?.addEventListener('click',e=>{
+    e.preventDefault();
+    update();
+    const msg=`Hi Oahu Notary Services! I need apostille/authentication assistance for ${count.value||1} ${docType.value} document(s) for use in ${country.value.trim()||'another country'}. I am looking for: ${level.value}. Please let me know the next processing steps and quote.`;
+    location.href=`sms:${ONS.phone}?&body=${encodeURIComponent(msg)}`;
+  });
+}
 
 
 let onsDeferredInstallPrompt=null;
@@ -401,5 +674,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   setupContactForm();
   renderLoanTable();
   setupEstimator();
+  setupEstateEstimator();
+  setupLoanEstimator();
+  setupApostilleQuoteBuilder();
   registerServiceWorker();
 });
