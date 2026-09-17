@@ -93,7 +93,7 @@ Clients are encouraged to provide their own qualified witness(es). If a required
 - A simple Town appointment with one notarized signature starts at $55 before applicable Hawaiʻi GET.
 - Short notice (4–24 hours): +$25.
 - Rush / immediate (less than 4 hours): +$50; not stacked with short notice.
-- Late-night appointments: +$50 from 10 PM–7 AM.
+- Late-night appointments: +$50 from 9 PM–8 AM.
 - Automatic Monday–Friday 4–7 PM peak-traffic surcharge removed.
 - No automatic weekend surcharge.
 - Exact travel pricing and any unusual access/parking adjustment are confirmed before booking.
