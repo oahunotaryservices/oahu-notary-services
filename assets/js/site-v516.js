@@ -9,11 +9,11 @@ const ONS = {
 
   // Standard mobile pricing: travel / meeting / appointment time.
   travel: {
-    'South Oʻahu': 50,
-    'East Oʻahu': 75,
-    'Central Oʻahu': 85,
-    'West Oʻahu': 90,
-    'North Oʻahu': 125
+    'South Oʻahu': 65,
+    'East Oʻahu': 80,
+    'Central Oʻahu': 90,
+    'West Oʻahu': 95,
+    'North Oʻahu': 130
   },
 
   // Estate-planning signing starting prices by service area.
