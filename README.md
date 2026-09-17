@@ -88,7 +88,7 @@ Clients are encouraged to provide their own qualified witness(es). If a required
 
 ## V5.5 Pricing Update
 
-- Town / South Oʻahu standard mobile travel / meeting fee starts at $50.
+- Town / South Oʻahu standard mobile travel / meeting fee starts at $65.
 - Notarization / signature fee remains $5 each.
 - A simple Town appointment with one notarized signature starts at $55 before applicable Hawaiʻi GET.
 - Short notice (4–24 hours): +$25.
