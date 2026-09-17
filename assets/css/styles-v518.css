@@ -1,0 +1,960 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
+
+/* Requested brand typography. Nexa Pro Text and Utopia are referenced as local fonts.
+   If licensed webfont files are later added, point @font-face src URLs to those files. */
+@font-face{
+  font-family:'Nexa Pro Text';
+  src:local('Nexa Pro Text'),local('NexaProText-Regular'),local('Nexa Pro');
+  font-style:normal;
+  font-weight:400 900;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Utopia';
+  src:local('Utopia'),local('Utopia Std'),local('UtopiaStd-Regular');
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Utopia';
+  src:local('Utopia Bold'),local('Utopia Std Bold'),local('UtopiaStd-Bold');
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+}
+
+:root{
+  --green:#1f4a3a;
+  --green-dark:#14362b;
+  --green-soft:#dfe9e3;
+  --cream:#f7f3ea;
+  --sand:#d6c5a6;
+  --sand-light:#eee4d2;
+  --white:#ffffff;
+  --ink:#1d2823;
+  --muted:#5f6a64;
+  --line:#d9ddd9;
+  --shadow:0 18px 45px rgba(24,53,42,.12);
+  --radius:0;
+  --max:1180px;
+  --font-title:'Nexa Pro Text','Avenir Next','Century Gothic',Arial,sans-serif;
+  --font-heading:'Utopia','Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+  --font-body:'Noto Sans',Arial,Helvetica,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font-body);color:var(--ink);background:#fff;line-height:1.55}
+img{max-width:100%;display:block}
+a{color:inherit}
+button,input,select,textarea{font:inherit}
+.container{width:min(calc(100% - 36px),var(--max));margin-inline:auto}
+.skip-link{position:absolute;left:-999px;top:0;background:#fff;color:#000;padding:10px;z-index:999}
+.skip-link:focus{left:10px;top:10px}
+.topbar{background:var(--green-dark);color:white;text-align:center;padding:8px 16px;font-size:.86rem}
+.site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);border-bottom:1px solid rgba(31,74,58,.1);backdrop-filter:blur(12px)}
+.nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:190px}
+.brand img{width:190px;height:auto;object-fit:contain}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{padding:9px 7px;border-radius:0;text-decoration:none;font-weight:700;font-size:.80rem;color:var(--green-dark)}
+.nav-links a:hover,.nav-links a.active{background:var(--green-soft)}
+.nav-cta{background:var(--green)!important;color:white!important}
+.menu-toggle{display:none;border:1px solid var(--line);background:white;border-radius:0;padding:9px 11px;font-weight:700;color:var(--green-dark)}
+
+.hero{background:linear-gradient(145deg,var(--cream),#fff 70%);overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;padding:66px 0 64px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;text-transform:uppercase;letter-spacing:.12em;font-size:.76rem;font-weight:800;color:var(--green);margin-bottom:12px}
+.eyebrow:before{content:'';width:30px;height:2px;background:var(--sand)}
+h1{font-family:var(--font-title);font-size:clamp(2.05rem,4vw,3.55rem);line-height:1.04;color:var(--green-dark);margin:0 0 16px;letter-spacing:-.035em;font-weight:800}
+h2,h3{font-family:var(--font-heading);line-height:1.13;color:var(--green-dark);margin:0 0 14px;font-weight:700}
+h2{font-size:clamp(1.85rem,3.6vw,2.85rem);letter-spacing:-.018em}
+h3{font-size:1.3rem}
+.title-font{font-family:var(--font-title)!important;font-weight:800!important;letter-spacing:-.026em}
+.compact-heading{font-size:clamp(1.65rem,3vw,2.35rem)!important}
+.lede,.subheading{font-family:var(--font-heading);font-weight:400;font-size:1.08rem;color:#47544d;max-width:780px}
+.hero .lede{font-size:1.06rem}
+.section-head{max-width:800px;margin-bottom:32px}
+.section-head p{color:var(--muted);font-size:1rem}
+.section-head .subheading{font-size:1.02rem}
+
+.hero-actions,.button-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border-radius:0;text-decoration:none;border:1px solid transparent;font-weight:800;cursor:pointer;transition:.18s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--green);color:white;box-shadow:0 9px 22px rgba(31,74,58,.2)}
+.btn-secondary{background:white;border-color:#b8c6be;color:var(--green-dark)}
+.btn-sand{background:var(--sand-light);color:var(--green-dark)}
+.btn-outline-light{border-color:rgba(255,255,255,.55);color:white}
+.text-link{color:var(--green);font-weight:800;text-decoration:underline;text-underline-offset:2px}
+.trust-line{display:flex;flex-wrap:wrap;gap:16px 22px;margin-top:26px;color:#435048;font-size:.92rem}
+.trust-line span:before{content:'•';font-weight:900;color:var(--green);margin-right:8px}
+.hero-card{position:relative;background:var(--white);border:1px solid #e3e5e2;border-radius:0;box-shadow:var(--shadow);padding:18px}
+.hero-card img{width:100%;height:350px;object-fit:cover;object-position:center;border-radius:0}
+.hero-badge{position:absolute;left:-22px;bottom:30px;background:var(--green-dark);color:white;padding:16px 18px;border-radius:0;box-shadow:var(--shadow);max-width:250px;font-size:.92rem}
+.hero-badge strong{display:block;font-family:var(--font-heading);font-size:1.08rem}
+
+.section{padding:72px 0}
+.section.alt{background:var(--cream)}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:white;border:1px solid #dfe4e0;border-radius:0;padding:24px;box-shadow:0 8px 24px rgba(20,54,43,.05)}
+.card p{color:var(--muted);margin-bottom:0}
+.service-card{min-height:180px}
+.service-card h3{margin-bottom:10px}
+.card-link{display:block;text-decoration:none}
+.card-link:hover{border-color:#9fb4a8;box-shadow:0 12px 30px rgba(20,54,43,.09)}
+.step-number{width:42px;height:42px;border:1px solid var(--green);display:grid;place-items:center;font-weight:800;color:var(--green-dark);margin-bottom:15px}
+.guarantee{background:var(--green-dark);color:white;border-radius:0;padding:34px;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}
+.guarantee h2,.guarantee h3{color:white}
+.guarantee p{margin-bottom:0;color:#e9f0ec}
+
+.pricing-intro{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin-bottom:28px}
+.pricing-note{border:1px solid var(--line);background:var(--sand-light);padding:20px;border-radius:0}
+.pricing-note strong{font-family:var(--font-heading);font-size:1.2rem;color:var(--green-dark)}
+.price-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.price-pill{border:1px solid #d9dfda;border-radius:0;padding:18px;text-align:center;background:white}
+.price-pill strong{font-family:var(--font-heading);color:var(--green-dark);font-size:1.62rem;display:block;margin-top:5px}
+.price-pill small{display:block;color:var(--muted);margin-top:2px}
+.price-key{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;color:var(--muted);font-size:.92rem}
+.price-key strong{color:var(--green-dark)}
+.map-wrap{background:white;border:1px solid #dfe4e0;border-radius:0;padding:24px;box-shadow:0 8px 24px rgba(20,54,43,.05)}
+.service-map-img{width:100%;max-width:720px;margin:0 auto;object-fit:contain}
+.map-caption{margin:14px 0 0;color:var(--muted);font-size:.88rem;text-align:center}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+.list-clean{list-style:disc;padding-left:1.25rem;margin:18px 0 0}
+.list-clean li{padding:9px 0 9px 4px;border-bottom:1px dashed #dfe3df}
+.list-clean li::marker{color:var(--green);font-size:1.05em}.list-clean li:before{content:none!important}
+.notice{padding:16px 18px;border-radius:0;background:var(--sand-light);border-left:4px solid var(--sand);color:#4a493f}
+.cta-band{background:linear-gradient(135deg,var(--green-dark),var(--green));color:white;padding:44px 0}
+.cta-band h2{color:white}
+.cta-band p{color:#e6efe9;max-width:720px}
+
+.page-hero{padding:50px 0 42px;background:linear-gradient(145deg,var(--cream),#fff)}
+.page-hero h1{font-size:clamp(1.95rem,3.5vw,3rem)}
+.page-hero .lede{font-size:1.04rem}
+.breadcrumb{font-size:.86rem;color:var(--muted);margin-bottom:14px}
+.breadcrumb a{color:var(--green)}
+.compact-page .page-hero{padding:42px 0 36px}
+.compact-page .page-hero h1{font-size:clamp(1.85rem,3.2vw,2.75rem)}
+.compact-page .lede{font-size:1rem}
+.compact-page .section{padding:62px 0}
+.compact-page .card{padding:20px}
+.compact-page .card p,.compact-page .list-clean{font-size:.94rem}
+
+.pricing-table{width:100%;border-collapse:collapse;border:1px solid var(--line);background:white}
+.pricing-table th,.pricing-table td{text-align:left;padding:14px 15px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.pricing-table th:last-child,.pricing-table td:last-child{border-right:none}
+.pricing-table th{background:var(--green-dark);color:white;font-family:var(--font-body);font-size:.9rem}
+.pricing-table tr:last-child td{border-bottom:none}
+.pricing-table td:not(:first-child){font-weight:700;color:var(--green-dark);white-space:nowrap}
+.table-wrap{overflow-x:auto;border:1px solid var(--line)}
+.table-wrap .pricing-table{border:0;min-width:760px}
+.loan-formula{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}
+.formula-part{border:1px solid var(--line);padding:18px;background:white;text-align:center}
+.formula-part strong{display:block;font-family:var(--font-heading);font-size:1.18rem;color:var(--green-dark)}
+.formula-plus{font-weight:900;color:var(--green);align-self:center;text-align:center}
+
+.accordion details{border-bottom:1px solid var(--line);padding:14px 0}
+.accordion summary{cursor:pointer;font-weight:800;color:var(--green-dark);font-family:var(--font-heading)}
+.accordion details p{color:var(--muted);font-size:.94rem}
+.form-card{background:white;border:1px solid var(--line);border-radius:0;padding:28px;box-shadow:var(--shadow)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+.field label{font-weight:800;color:var(--green-dark)}
+.field input,.field select,.field textarea{width:100%;border:1px solid #bfc9c2;border-radius:0;padding:12px 13px;background:white;color:var(--ink)}
+.field textarea{min-height:120px;resize:vertical}
+.field small{color:var(--muted)}
+.quote-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:24px;align-items:start}
+.quote-summary{position:sticky;top:104px;background:var(--green-dark);color:white;border-radius:0;overflow:hidden}
+.quote-summary .inner{padding:26px}
+.quote-summary h2{color:white;font-size:1.65rem}
+.quote-total{font:700 clamp(2.4rem,5vw,3.8rem) var(--font-heading);margin:8px 0}
+.quote-lines{margin-top:18px;border-top:1px solid rgba(255,255,255,.2);padding-top:12px}
+.quote-line{display:flex;justify-content:space-between;gap:18px;padding:8px 0;color:#e9f0ec}
+.quote-note{background:rgba(255,255,255,.08);padding:14px;border-radius:0;margin-top:16px;font-size:.88rem;color:#e9f0ec}
+.review-placeholder{border:1px dashed #acb8b0;background:#fbfcfb;border-radius:0;padding:24px}
+
+.footer{background:#0f2d24;color:#dfe8e3;padding:50px 0 26px}
+.footer-grid{display:grid;grid-template-columns:1.3fr .8fr .8fr;gap:34px}
+.footer h3{color:white;font-size:1.08rem}
+.footer a{color:#e5eee8;text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.footer small{color:#aabbb1}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.15);margin-top:32px;padding-top:18px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:.84rem;color:#b9c8c0}
+.floating-actions{position:fixed;right:16px;bottom:16px;z-index:45;display:flex;flex-direction:column;gap:10px}
+.floating-actions a{box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.kicker{font-size:.86rem;text-transform:uppercase;letter-spacing:.11em;color:var(--green);font-weight:800}
+.policy-box{border-left:4px solid var(--green);padding:4px 0 4px 18px;margin:18px 0}
+.policy-box h3{margin-bottom:6px}
+.service-tag{display:inline-block;background:var(--green-soft);color:var(--green-dark);padding:6px 10px;border-radius:0;font-size:.8rem;font-weight:800;margin:3px}
+.muted{color:var(--muted)}
+.small{font-size:.9rem}
+
+@media(max-width:1060px){
+  .nav-links a{padding:9px 8px;font-size:.82rem}
+  .brand img{width:175px}
+}
+@media(max-width:960px){
+  .nav-links{display:none;position:absolute;left:18px;right:18px;top:86px;background:white;box-shadow:var(--shadow);border:1px solid var(--line);border-radius:0;padding:12px;flex-direction:column;align-items:stretch}
+  .nav-links.open{display:flex}
+  .nav-links a{border-radius:0}
+  .menu-toggle{display:block}
+  .hero-grid,.two-col,.quote-layout,.pricing-intro{grid-template-columns:1fr}
+  .hero-card{max-width:620px}
+  .hero-badge{left:16px}
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:1fr 1fr}
+  .price-grid{grid-template-columns:repeat(2,1fr)}
+  .quote-summary{position:static}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .loan-formula{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .container{width:min(calc(100% - 24px),var(--max))}
+  .brand img{width:168px}
+  .hero-grid{padding:44px 0 48px;gap:28px}
+  .hero-card img{height:270px}
+  .section{padding:56px 0}
+  .grid-2,.grid-3,.grid-4,.price-grid,.form-grid,.footer-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .guarantee{grid-template-columns:1fr;padding:26px}
+  .pricing-table{font-size:.86rem}
+  .pricing-table th,.pricing-table td{padding:11px 9px}
+  .floating-actions{left:12px;right:12px;bottom:10px;flex-direction:row}
+  .floating-actions .btn{flex:1;padding:11px 10px;font-size:.88rem}
+  .footer{padding-bottom:88px}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+
+/* 2026-08 site revisions */
+.home-hero-photo{height:520px!important;object-fit:cover!important;object-position:center 50%!important;border-radius:0!important}
+.hero-card{border-radius:0}
+.home-price-grid{grid-template-columns:repeat(5,1fr)!important}
+.map-legend{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:18px}
+.map-legend-chip{display:block;text-align:center;padding:9px 6px;border:1px solid rgba(0,0,0,.12);font-weight:800;font-size:.86rem;line-height:1.1}
+.map-legend-chip.north{background:#5d9fa8;color:#fff}
+.map-legend-chip.central{background:#8069a6;color:#fff}
+.map-legend-chip.east{background:#a95f55;color:#fff}
+.map-legend-chip.west{background:#d39a4f;color:#2b2418}
+.map-legend-chip.south{background:#78aa9b;color:#183d32}
+.social-links{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0}
+.connect-title{margin-top:18px!important;margin-bottom:7px!important}
+.review-widget-shell{background:#fff;border:1px solid var(--line);padding:18px;min-height:180px;overflow:hidden}
+.page-hero-photo-grid{display:grid;grid-template-columns:1fr .82fr;gap:38px;align-items:center}
+.page-photo-card{background:#fff;border:1px solid var(--line);padding:12px;box-shadow:var(--shadow)}
+.page-photo-card img{width:100%;aspect-ratio:16/10;object-fit:cover}
+@media(max-width:1100px){.nav-links a{font-size:.76rem;padding:9px 5px}.brand img{width:175px}}
+@media(max-width:960px){.home-price-grid{grid-template-columns:repeat(2,1fr)!important}.map-legend{grid-template-columns:repeat(3,1fr)}.page-hero-photo-grid{grid-template-columns:1fr}.page-photo-card{max-width:760px}}
+@media(max-width:640px){.home-hero-photo{height:410px!important}.home-price-grid,.map-legend{grid-template-columns:1fr!important}}
+
+
+/* Oahu Notary Services brand cleanup — 2026-08-23
+   Square visual system throughout the site.
+   The only intentionally rounded website buttons are text/call and secure-upload actions. */
+:root{--radius:0}
+
+/* Remove decorative rounded corners site-wide. */
+*:not(svg):not(path){border-radius:0!important}
+
+/* Preserve rounded corners only for the requested direct-action buttons. */
+.btn[data-text-link],
+.btn[data-phone-link],
+.btn[data-upload-link],
+#textEstimate{
+  border-radius:9px!important;
+}
+
+/* Bullet points replace all decorative check marks. */
+.trust-line span:before{
+  content:'•'!important;
+  color:var(--green)!important;
+  font-weight:900!important;
+  margin-right:8px!important;
+}
+.list-clean{
+  list-style:disc!important;
+  padding-left:1.25rem!important;
+}
+.list-clean li{
+  padding-left:4px!important;
+  position:static!important;
+}
+.list-clean li::marker{
+  color:var(--green);
+}
+.list-clean li:before{
+  content:none!important;
+}
+
+/* Keep the exact Oahu Notary brand palette visible in the installed web-app experience. */
+html,body{background-color:var(--white)}
+::selection{background:var(--green-soft);color:var(--green-dark)}
+input,select,textarea,button{accent-color:var(--green)}
+
+
+/* Branded installed-app launch treatment */
+.ons-app-splash{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:grid;
+  place-items:center;
+  background:#f7f3ea;
+  color:#1f4a3a;
+  opacity:1;
+  transition:opacity .32s ease;
+}
+.ons-app-splash.hide{opacity:0;pointer-events:none}
+.ons-app-splash-inner{text-align:center;padding:28px}
+.ons-app-splash img{
+  width:112px;
+  height:112px;
+  display:block;
+  margin:0 auto 22px;
+  object-fit:contain;
+}
+.ons-app-splash-name{
+  font-family:var(--font-title);
+  font-size:clamp(1.65rem,6vw,2.25rem);
+  font-weight:800;
+  letter-spacing:.01em;
+  line-height:1.05;
+}
+.ons-app-splash-tagline{
+  margin-top:10px;
+  font-family:var(--font-body);
+  font-size:.9rem;
+  color:#5f6c65;
+  letter-spacing:.03em;
+}
+@media(prefers-reduced-motion:reduce){.ons-app-splash{transition:none}}
+
+
+/* Oahu Notary Services refinements — 2026-08-23e */
+/* All clickable buttons are intentionally rounded; content cards and fields stay square. */
+.btn,
+button,
+.menu-toggle,
+.footer-upload-btn,
+.social-link{
+  border-radius:999px!important;
+}
+
+/* Memory aid: 6248 = OAHU on a phone keypad. Keep all ten digits on one baseline. */
+.phone-memory{
+  display:inline-grid;
+  grid-template-columns:auto auto;
+  align-items:baseline;
+  white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+  line-height:1;
+  padding-bottom:.58em;
+}
+.phone-prefix{
+  display:inline-block;
+  line-height:1;
+}
+.phone-last4{
+  display:inline-block;
+  position:relative;
+  line-height:1;
+}
+.phone-oahu{
+  position:absolute;
+  top:calc(100% + 3px);
+  left:50%;
+  transform:translateX(-50%);
+  white-space:nowrap;
+  font-family:var(--font-body);
+  font-size:.50em;
+  font-weight:800;
+  letter-spacing:.07em;
+  line-height:1;
+  opacity:.86;
+}
+.btn .phone-memory{padding-bottom:.54em}
+.btn .phone-oahu{font-size:.48em;top:calc(100% + 2px)}
+.quick-phone-number .phone-memory{font-size:1em;padding-bottom:.62em}
+
+/* Make Connect With Us a distinct footer destination. */
+.footer-grid{grid-template-columns:1.2fr .72fr 1fr 1.1fr;gap:28px}
+.footer-contact .footer-upload-btn{
+  display:inline-flex;
+  margin-top:8px;
+  padding:10px 14px;
+  background:var(--sand-light);
+  color:var(--green-dark);
+  border:1px solid rgba(255,255,255,.22);
+  font-size:.86rem;
+}
+.footer-connect{
+  padding:18px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.055);
+}
+.footer-connect .connect-title{margin:0 0 4px!important;font-size:1.18rem}
+.connect-copy{margin:0 0 13px;color:#b9c8c0;font-size:.88rem}
+.social-links{display:grid;gap:8px;margin:0}
+.social-link{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  padding:8px 12px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.07);
+  font-weight:700;
+  text-decoration:none!important;
+}
+.social-link:hover{background:rgba(255,255,255,.13);transform:translateY(-1px)}
+.social-link img{width:24px;height:24px;flex:0 0 24px}
+
+/* Reviews: compact share section with Leave a Review immediately below the heading. */
+.review-share{max-width:760px}
+.review-leave-card{margin-top:8px}
+
+@media(max-width:960px){
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .footer-grid{grid-template-columns:1fr}
+  .social-links{grid-template-columns:1fr}
+}
+
+
+/* Permanent app-install area — visitors can install without waiting for a browser banner. */
+.app-install-section{padding-top:42px;padding-bottom:42px;background:var(--cream)}
+.app-install-card{
+  display:grid;
+  grid-template-columns:150px 1fr;
+  gap:30px;
+  align-items:center;
+  padding:28px;
+  border:1px solid var(--line);
+  background:#fff;
+  box-shadow:0 8px 24px rgba(20,54,43,.05);
+}
+.app-install-brand{
+  display:grid;
+  place-items:center;
+  padding:14px;
+  border:1px solid var(--line);
+  background:var(--sand-light);
+}
+.app-install-brand img{width:118px;height:118px;display:block;object-fit:contain}
+.app-install-copy h2{margin-top:5px;margin-bottom:10px}
+.app-install-copy>p{max-width:790px;color:var(--muted)}
+.app-install-benefits{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 22px;
+  margin:16px 0 0;
+  padding-left:1.2rem;
+  color:#435048;
+  font-size:.92rem;
+}
+.app-install-benefits li::marker{color:var(--green)}
+.app-install-status{margin:10px 0 0;color:var(--green-dark);font-weight:700;font-size:.9rem;min-height:1.35em}
+.app-install-help{
+  margin-top:12px;
+  padding:14px 16px;
+  border:1px solid var(--line);
+  background:var(--sand-light);
+  color:#424b46;
+  font-size:.92rem;
+}
+.app-install-help[hidden]{display:none}
+[data-install-app]:disabled{opacity:.68;cursor:default;transform:none!important}
+@media(max-width:700px){
+  .app-install-card{grid-template-columns:1fr;padding:22px}
+  .app-install-brand{width:148px;margin:0 auto}
+  .app-install-copy{text-align:left}
+  .app-install-benefits{display:block}
+  .app-install-benefits li{margin:7px 0}
+}
+
+/* Header/logo visibility + mobile overflow correction — v4.6 */
+html,body{max-width:100%;overflow-x:hidden}
+.topbar{white-space:normal;overflow-wrap:anywhere}
+.nav{width:100%;min-width:0}
+.brand{min-width:0;flex:0 1 auto;max-width:260px}
+.brand img{width:190px;max-width:100%;height:auto;object-fit:contain}
+.hero-grid>*{min-width:0}
+.hero-actions,.button-row{max-width:100%}
+.hero-actions .btn,.button-row .btn{max-width:100%}
+.phone-memory{max-width:100%}
+
+@media(max-width:960px){
+  .nav{gap:10px;min-height:72px}
+  .brand{max-width:calc(100% - 112px)}
+  .brand img{width:220px;max-width:100%}
+  .menu-toggle{display:block;flex:0 0 auto}
+}
+
+@media(max-width:640px){
+  .topbar{font-size:.78rem;line-height:1.35;padding:8px 12px}
+  .brand{max-width:72%}
+  .brand img{width:218px;max-width:100%}
+  .hero h1{font-size:clamp(1.95rem,8.4vw,2.4rem)}
+}
+
+
+/* Trust, About, FAQ and policy additions — 2026-09-04 */
+.process-card{position:relative;padding-top:62px}
+.process-step{position:absolute;top:18px;left:22px;width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--green);color:var(--green-dark);font-weight:800;font-family:var(--font-body)}
+.about-preview-grid,.about-page-grid{display:grid;grid-template-columns:minmax(280px,.8fr) 1.2fr;gap:42px;align-items:center}
+.about-preview-photo,.about-page-photo{border:1px solid var(--line);background:#fff;padding:10px}
+.about-preview-photo img,.about-page-photo img{width:100%;height:auto;display:block;object-fit:cover}
+.about-preview-photo img{aspect-ratio:1/1}
+.trust-bullets{margin-top:14px}
+.credential-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px}
+.credential-grid>div{border:1px solid var(--line);padding:16px;background:#fff}
+.credential-grid strong{display:block;color:var(--green-dark);font-family:var(--font-heading);font-size:1.05rem}
+.credential-grid span{display:block;color:var(--muted);font-size:.9rem;margin-top:4px}
+.service-area-text{border-top:1px solid var(--line);margin-top:18px;padding-top:16px}
+.service-area-text h3{font-size:1.05rem;margin-bottom:7px}
+.service-area-text p{font-size:.88rem;color:var(--muted);margin:0}
+.home-reviews{padding-top:58px;padding-bottom:58px}
+.home-review-shell{border:1px solid var(--line);background:#fff;padding:18px;min-height:180px}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}
+.faq-grid details{break-inside:avoid}
+.policy-summary-grid .card{min-height:220px}
+.policy-callout{margin-top:18px;border:1px solid var(--line);background:#fff;padding:20px;display:flex;gap:20px;justify-content:space-between;align-items:center}
+.policy-callout p{margin:0;max-width:780px;color:var(--muted)}
+.policy-page{display:grid;gap:18px;max-width:930px}
+.policy-block{border:1px solid var(--line);padding:26px;background:#fff}
+.policy-block p:last-child{margin-bottom:0}
+.policy-ack{margin-top:8px}
+.checkbox-line{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;color:var(--ink)}
+.checkbox-line input{margin-top:4px;flex:0 0 auto}
+.checkbox-line a{color:var(--green);font-weight:700}
+.footer-bottom{gap:18px;flex-wrap:wrap}
+@media(min-width:961px){
+  .nav-links a{font-size:.75rem;padding-inline:5px}
+}
+@media(max-width:760px){
+  .about-preview-grid,.about-page-grid{grid-template-columns:1fr;gap:24px}
+  .about-preview-photo,.about-page-photo{max-width:470px}
+  .credential-grid{grid-template-columns:1fr}
+  .faq-grid{grid-template-columns:1fr}
+  .policy-callout{align-items:flex-start;flex-direction:column}
+}
+
+/* V5.2 pricing emphasis */
+.notarial-fee-highlight{border-left:4px solid var(--green);background:#f7f3ea}
+.notarial-fee-highlight p{margin:.45rem 0 0;color:var(--muted)}
+
+/* V5.5 competitive Town pricing */
+.town-value-highlight{
+  border-left:4px solid #1F4A3A;
+  padding-left:18px;
+}
+.pricing-competitive-note{
+  margin-top:22px;
+}
+
+
+/* V5.10 form, button and discounts cleanup */
+:root{--sand-button:#b59663}
+.btn{border-radius:0!important;box-shadow:none!important}
+.btn:hover{transform:translateY(-1px)}
+.btn-contact{background:var(--green)!important;border:1px solid var(--green)!important;color:#fff!important;border-radius:11px!important;box-shadow:none!important}
+.btn-contact:hover{box-shadow:0 12px 22px rgba(20,54,43,.20)!important}
+.btn-upload{background:var(--green)!important;border:1px solid var(--green)!important;color:#fff!important;border-radius:0!important;box-shadow:none!important}
+.btn-upload:hover{box-shadow:0 12px 22px rgba(20,54,43,.20)!important}
+.btn-estimate{background:var(--sand-button)!important;border:1px solid var(--sand-button)!important;color:#fff!important;border-radius:0!important;box-shadow:none!important}
+.btn-estimate:hover{box-shadow:0 12px 22px rgba(20,54,43,.18)!important}
+.button-row.contact-actions{align-items:center}
+.checkbox-line,.checkbox-panel{display:flex!important;align-items:flex-start!important;gap:12px!important;width:100%!important;max-width:100%!important}
+.checkbox-panel{padding:14px 16px;border:1px solid var(--line);background:#fbfcfa}
+.checkbox-line input,.checkbox-panel input{flex:0 0 auto!important;width:18px!important;height:18px!important;margin:2px 0 0 0!important}
+.checkbox-line span,.checkbox-panel span{display:block!important;flex:1 1 auto!important;max-width:none!important;min-width:0!important;color:var(--ink)!important;font-weight:700}
+.checkbox-line small,.checkbox-panel small{display:block!important;margin-top:4px!important;color:var(--muted)!important;font-weight:400!important}
+.checkbox-line a,.checkbox-panel a{color:var(--green)!important;font-weight:800!important}
+.field.full .checkbox-panel,.field.full .checkbox-line{grid-column:1/-1}
+.discounts-grid{display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:18px;margin-top:18px}
+.discount-card{border:1px solid var(--line);background:#fff;padding:22px;box-shadow:0 8px 24px rgba(20,54,43,.05)}
+.discount-card h3{margin-bottom:8px}
+.discount-card p{margin:0;color:var(--muted)}
+.discount-rules{margin-top:18px}
+.form-card .button-row,.quote-summary .button-row{align-items:center}
+.footer-contact .btn{display:none!important}
+@media(max-width:760px){.discounts-grid{grid-template-columns:1fr}}
+
+
+/* V5.11 — one consistent button system across the entire site */
+.btn{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  font-weight:800!important;
+  text-decoration:none!important;
+  color:#fff!important;
+  transition:transform .18s ease, box-shadow .18s ease, filter .18s ease!important;
+  box-shadow:none!important;
+}
+
+/* General actions and contact actions: brand green, slightly rounded */
+.btn-general,
+.btn-contact{
+  background:var(--green)!important;
+  border:1px solid var(--green)!important;
+  color:#fff!important;
+  border-radius:11px!important;
+}
+.btn-general:hover,
+.btn-contact:hover{
+  box-shadow:0 12px 24px rgba(20,54,43,.22)!important;
+  transform:translateY(-1px)!important;
+}
+
+/* Secure Upload: brand green, square */
+.btn-upload{
+  background:var(--green)!important;
+  border:1px solid var(--green)!important;
+  color:#fff!important;
+  border-radius:0!important;
+}
+.btn-upload:hover{
+  box-shadow:0 12px 24px rgba(20,54,43,.22)!important;
+  transform:translateY(-1px)!important;
+}
+
+/* Estimate Fee: brand tan, square */
+.btn-estimate{
+  background:#b59663!important;
+  border:1px solid #b59663!important;
+  color:#fff!important;
+  border-radius:0!important;
+}
+.btn-estimate:hover{
+  box-shadow:0 12px 24px rgba(79,62,34,.20)!important;
+  transform:translateY(-1px)!important;
+}
+
+.button-row.contact-actions{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:12px!important;
+  align-items:center!important;
+}
+
+/* Text and Call buttons show the actual number, so give them enough room. */
+.button-row.contact-actions .btn-contact{
+  min-width:190px;
+}
+.btn-contact .phone-memory{
+  display:inline-grid!important;
+  white-space:nowrap!important;
+  color:#fff!important;
+}
+.btn-contact .phone-oahu{
+  color:#fff!important;
+}
+
+/* Keep general button text white even in dark CTA sections. */
+.cta-band .btn,
+.guarantee .btn{
+  color:#fff!important;
+}
+
+/* Mobile: stack big contact actions cleanly. */
+@media(max-width:640px){
+  .button-row.contact-actions{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    width:100%!important;
+  }
+  .button-row.contact-actions .btn,
+  .btn-contact{
+    width:100%!important;
+    min-width:0!important;
+  }
+}
+
+
+/* V5.12 simplified estimator */
+.simplified-estimator h2{margin-bottom:8px}
+.quick-estimate-grid{margin-top:22px}
+.quick-estimate-grid .field{gap:8px}
+.quick-estimate-grid .field>label:not(.checkbox-panel){font-size:1rem}
+.estimate-extras{
+  border:1px solid var(--line);
+  background:#fbfcfa;
+}
+.estimate-extras summary{
+  cursor:pointer;
+  padding:16px 18px;
+  font-weight:800;
+  color:var(--green-dark);
+}
+.estimate-extras[open] summary{border-bottom:1px solid var(--line)}
+.optional-estimate-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  padding:18px;
+}
+.optional-estimate-grid .field.full{grid-column:1/-1}
+.estate-estimate-note .notice{margin:0}
+.simplified-estimator .checkbox-panel{
+  padding:12px 14px;
+}
+@media(max-width:640px){
+  .optional-estimate-grid{grid-template-columns:1fr}
+  .optional-estimate-grid .field.full{grid-column:auto}
+}
+
+
+/* V5.13 service-page estimators */
+.service-estimator-section{scroll-margin-top:100px}
+.service-estimator-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);
+  gap:24px;
+  align-items:start;
+}
+.service-estimate-result{
+  position:sticky;
+  top:104px;
+  background:var(--green-dark);
+  color:#fff;
+  padding:26px;
+}
+.service-estimate-result .kicker{color:var(--sand)}
+.service-estimate-result h3{color:#fff}
+.service-estimate-total{
+  font:700 clamp(2.2rem,5vw,3.5rem) var(--font-heading);
+  margin:8px 0 14px;
+}
+.service-estimate-lines{
+  border-top:1px solid rgba(255,255,255,.2);
+  padding-top:10px;
+}
+.service-estimate-lines .quote-line{
+  color:#e9f0ec;
+}
+.service-estimate-result>p{
+  margin:16px 0 0;
+  color:#e9f0ec;
+  font-size:.9rem;
+}
+.service-estimator-note{
+  margin-top:16px;
+  padding:14px 16px;
+  background:var(--sand-light);
+  border-left:4px solid var(--sand);
+  color:#4a493f;
+}
+.apostille-summary-line{
+  padding:9px 0;
+  border-bottom:1px solid rgba(255,255,255,.14);
+}
+.apostille-summary-line span{
+  display:block;
+  color:#cddbd3;
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+.apostille-summary-line strong{
+  display:block;
+  margin-top:2px;
+  color:#fff;
+}
+@media(max-width:960px){
+  .service-estimator-layout{grid-template-columns:1fr}
+  .service-estimate-result{position:static}
+}
+
+
+/* V5.14 — robust estimator results */
+.estimate-highlight{
+  position:sticky;
+  top:104px;
+  background:#fff!important;
+  color:var(--ink)!important;
+  border:2px solid var(--green)!important;
+  box-shadow:0 16px 38px rgba(20,54,43,.14)!important;
+  padding:26px!important;
+}
+.estimate-highlight .kicker{
+  color:var(--green)!important;
+}
+.estimate-highlight h2,
+.estimate-highlight h3{
+  color:var(--green-dark)!important;
+}
+.estimate-highlight .quote-total,
+.estimate-highlight .service-estimate-total{
+  color:var(--green-dark)!important;
+  font:700 clamp(2.6rem,6vw,4rem) var(--font-heading)!important;
+  margin:8px 0 14px!important;
+}
+.estimate-highlight .quote-lines,
+.estimate-highlight .service-estimate-lines{
+  border-top:1px solid var(--line)!important;
+  padding-top:10px!important;
+}
+.estimate-highlight .quote-line,
+.estimate-highlight .estimate-line{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  padding:9px 0;
+  color:var(--ink)!important;
+  border-bottom:1px solid #edf0ed;
+}
+.estimate-highlight .quote-note,
+.estimate-highlight>p{
+  background:var(--sand-light)!important;
+  color:#4a493f!important;
+  border:0!important;
+  margin-top:16px!important;
+  padding:14px!important;
+}
+.estimate-highlight .apostille-summary-line{
+  border-bottom:1px solid var(--line)!important;
+}
+.estimate-highlight .apostille-summary-line span{
+  color:var(--muted)!important;
+}
+.estimate-highlight .apostille-summary-line strong{
+  color:var(--green-dark)!important;
+}
+.apostille-start-price{
+  display:grid;
+  gap:4px;
+  max-width:520px;
+  margin:0 0 26px;
+  padding:18px 20px;
+  border:2px solid var(--green);
+  background:#fff;
+  box-shadow:0 10px 26px rgba(20,54,43,.08);
+}
+.apostille-start-price span{
+  color:var(--green);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-size:.76rem;
+}
+.apostille-start-price strong{
+  color:var(--green-dark);
+  font:700 2rem var(--font-heading);
+}
+.apostille-start-price small{
+  color:var(--muted);
+}
+@media(max-width:960px){
+  .estimate-highlight{position:static}
+}
+
+
+/* V5.16 calculator reliability + pricing refresh */
+[hidden]{display:none!important}
+
+.estimate-highlight{
+  border:3px solid var(--green)!important;
+  background:#fff!important;
+  box-shadow:0 18px 42px rgba(20,54,43,.16)!important;
+  padding:0!important;
+  overflow:hidden;
+}
+.estimate-highlight .kicker{
+  display:block!important;
+  margin:0!important;
+  padding:12px 18px!important;
+  background:var(--green)!important;
+  color:#fff!important;
+  letter-spacing:.10em!important;
+}
+.estimate-highlight h2{
+  padding:18px 18px 0!important;
+  margin-bottom:4px!important;
+}
+.estimate-highlight .quote-total,
+.estimate-highlight .service-estimate-total{
+  margin:0!important;
+  padding:4px 18px 14px!important;
+  font:700 clamp(2.8rem,7vw,4.4rem) var(--font-heading)!important;
+  color:var(--green-dark)!important;
+  background:var(--sand-light)!important;
+}
+.estimate-highlight .quote-lines,
+.estimate-highlight .service-estimate-lines{
+  padding:14px 18px 6px!important;
+  border-top:0!important;
+}
+.estimate-highlight .estimate-line,
+.estimate-highlight .quote-line{
+  display:flex!important;
+  justify-content:space-between!important;
+  gap:16px!important;
+  padding:9px 0!important;
+  border-bottom:1px solid var(--line)!important;
+  color:var(--ink)!important;
+}
+.estimate-highlight .quote-note,
+.estimate-highlight>p{
+  margin:12px 18px 18px!important;
+  padding:13px 14px!important;
+  background:#f7f3ea!important;
+  color:#4a493f!important;
+}
+@media(max-width:1100px){
+  .service-estimator-layout,
+  .quote-layout{
+    grid-template-columns:1fr!important;
+  }
+  .estimate-highlight{
+    position:static!important;
+  }
+}
+
+
+/* V5.17 — discounts moved directly above ZIP-code service map */
+.pricing-discount-block{
+  margin:30px 0 24px;
+  padding:24px;
+  border:2px solid var(--sand);
+  background:#fbf7ef;
+  box-shadow:0 10px 28px rgba(20,54,43,.07);
+}
+.pricing-discount-block .section-head{
+  margin-bottom:18px;
+}
+.pricing-discount-block .section-head h2{
+  margin-bottom:8px;
+}
+.pricing-discount-block .section-head p{
+  margin-bottom:0;
+}
+.pricing-discount-block .discounts-grid{
+  margin-top:0;
+}
+.pricing-discount-block .discount-card{
+  background:#fff;
+  border:1px solid #ded7c9;
+}
+.pricing-discount-block .discount-rules{
+  margin-top:18px;
+}
+.discount-mention-note{
+  margin:12px 0 0;
+  font-weight:800;
+  color:var(--green-dark);
+}
+@media(max-width:760px){
+  .pricing-discount-block{
+    padding:18px;
+    margin:24px 0 20px;
+  }
+}
+
+/* V5.18 */
+[hidden]{display:none!important}
