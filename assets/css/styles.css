@@ -675,3 +675,98 @@ html,body{max-width:100%;overflow-x:hidden}
     min-width:0!important;
   }
 }
+
+
+/* V5.12 simplified estimator */
+.simplified-estimator h2{margin-bottom:8px}
+.quick-estimate-grid{margin-top:22px}
+.quick-estimate-grid .field{gap:8px}
+.quick-estimate-grid .field>label:not(.checkbox-panel){font-size:1rem}
+.estimate-extras{
+  border:1px solid var(--line);
+  background:#fbfcfa;
+}
+.estimate-extras summary{
+  cursor:pointer;
+  padding:16px 18px;
+  font-weight:800;
+  color:var(--green-dark);
+}
+.estimate-extras[open] summary{border-bottom:1px solid var(--line)}
+.optional-estimate-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  padding:18px;
+}
+.optional-estimate-grid .field.full{grid-column:1/-1}
+.estate-estimate-note .notice{margin:0}
+.simplified-estimator .checkbox-panel{
+  padding:12px 14px;
+}
+@media(max-width:640px){
+  .optional-estimate-grid{grid-template-columns:1fr}
+  .optional-estimate-grid .field.full{grid-column:auto}
+}
+
+
+/* V5.13 service-page estimators */
+.service-estimator-section{scroll-margin-top:100px}
+.service-estimator-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);
+  gap:24px;
+  align-items:start;
+}
+.service-estimate-result{
+  position:sticky;
+  top:104px;
+  background:var(--green-dark);
+  color:#fff;
+  padding:26px;
+}
+.service-estimate-result .kicker{color:var(--sand)}
+.service-estimate-result h3{color:#fff}
+.service-estimate-total{
+  font:700 clamp(2.2rem,5vw,3.5rem) var(--font-heading);
+  margin:8px 0 14px;
+}
+.service-estimate-lines{
+  border-top:1px solid rgba(255,255,255,.2);
+  padding-top:10px;
+}
+.service-estimate-lines .quote-line{
+  color:#e9f0ec;
+}
+.service-estimate-result>p{
+  margin:16px 0 0;
+  color:#e9f0ec;
+  font-size:.9rem;
+}
+.service-estimator-note{
+  margin-top:16px;
+  padding:14px 16px;
+  background:var(--sand-light);
+  border-left:4px solid var(--sand);
+  color:#4a493f;
+}
+.apostille-summary-line{
+  padding:9px 0;
+  border-bottom:1px solid rgba(255,255,255,.14);
+}
+.apostille-summary-line span{
+  display:block;
+  color:#cddbd3;
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+.apostille-summary-line strong{
+  display:block;
+  margin-top:2px;
+  color:#fff;
+}
+@media(max-width:960px){
+  .service-estimator-layout{grid-template-columns:1fr}
+  .service-estimate-result{position:static}
+}
