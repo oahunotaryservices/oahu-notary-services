@@ -41,7 +41,7 @@ const ONS = {
     'Standard appointment': 0,
     'Short notice, 4–24 hours': 25,
     'Rush / immediate, less than 4 hours': 50,
-    'Late-night appointment, 10 PM–7 AM': 50,
+    'Late-night appointment, 9 PM–8 AM': 50,
     'State or federal holiday': 50
   },
 
@@ -644,7 +644,7 @@ function setupBrandedAppSplash(){
   splash.setAttribute('aria-hidden','true');
   splash.innerHTML=`
     <div class="ons-app-splash-inner">
-      <img src="assets/img/ons-brand-icon-192.png?v=20260916f" alt="">
+      <img src="assets/img/ons-brand-icon-192.png?v=20260917a" alt="">
       <div class="ons-app-splash-name">Oahu Notary Services</div>
       <div class="ons-app-splash-tagline">Mobile Notary • Oʻahu, Hawaiʻi</div>
     </div>`;
@@ -660,7 +660,7 @@ function setupBrandedAppSplash(){
 function registerServiceWorker(){
   if(!('serviceWorker' in navigator)) return;
   window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('/service-worker.js?v=20260916f',{updateViaCache:'none'})
+    navigator.serviceWorker.register('/service-worker.js?v=20260917a',{updateViaCache:'none'})
       .then(reg=>reg.update())
       .catch(()=>{});
   });
