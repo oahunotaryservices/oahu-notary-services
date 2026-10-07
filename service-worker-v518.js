@@ -1,4 +1,4 @@
-const CACHE_NAME='ons-20260917a';
+const CACHE_NAME='ons-reviews-20261006';
 const CORE=[
   '/',
   '/index.html',
