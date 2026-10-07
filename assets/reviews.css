@@ -1,0 +1,13 @@
+[data-notary-reviews]{color:var(--green,#1f4a3a);font-family:inherit;min-width:0}
+[data-notary-reviews] p{margin:0 0 14px}
+[data-notary-reviews] a{color:inherit;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+[data-notary-reviews] a:focus-visible{outline:2px solid #1f4a3a;outline-offset:4px}
+[data-notary-reviews] .google-review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:22px 0}
+[data-notary-reviews] article{padding:22px;background:#faf8f4;border:1px solid #e4ddcf;min-width:0}
+[data-notary-reviews] .review-author{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-weight:700}
+[data-notary-reviews] .review-author img{width:40px;height:40px;object-fit:cover;flex-shrink:0}
+[data-notary-reviews] .review-text{white-space:pre-wrap;overflow-wrap:anywhere;color:#252525}
+[data-notary-reviews] .review-actions{display:flex;flex-wrap:wrap;gap:12px 24px;margin:20px 0}
+[data-notary-reviews] .review-footer{display:flex;margin:16px 0 6px}
+[data-notary-reviews] .google-attribution{font-family:Roboto,Arial,sans-serif;font-size:14px;font-weight:400;font-style:normal;letter-spacing:normal;white-space:nowrap;color:#1f1f1f}
+@media(max-width:640px){[data-notary-reviews] .google-review-grid{grid-template-columns:1fr}[data-notary-reviews] article{padding:18px}}
