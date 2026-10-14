@@ -958,3 +958,15 @@ html,body{max-width:100%;overflow-x:hidden}
 
 /* V5.18 */
 [hidden]{display:none!important}
+
+
+/* V5.20 About-page personal note */
+.about-personal-note{
+  margin-top:28px;
+  padding:28px 30px;
+  border-left:5px solid var(--sand);
+  background:#fbf8f1;
+}
+.about-personal-note .compact-heading{margin-top:7px;margin-bottom:12px}
+.about-personal-note p:last-child{margin-bottom:0}
+@media(max-width:640px){.about-personal-note{padding:22px 20px}}
