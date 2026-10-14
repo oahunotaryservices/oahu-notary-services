@@ -72,7 +72,7 @@ The Home page includes a permanent **Install Oahu Notary Services** section at `
 
 ## September 2026 Trust & Policy Update
 
-- Added `about.html` with owner photo, credentials, E&O coverage, background-screening and trust information.
+- Added `about.html` with owner photo, credentials, E&O insurance, background-screening and trust information.
 - Added `policies.html` covering payment, cancellation/rescheduling/no-show, refunds, client responsibility and limitation of responsibility.
 - Added general FAQs, a three-step How It Works section, local service-area text, and a live Google review preview on Home.
 - Added LocalBusiness structured data and new sitemap entries.

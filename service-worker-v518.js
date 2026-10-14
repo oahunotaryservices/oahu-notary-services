@@ -1,11 +1,11 @@
-const CACHE_NAME='ons-reviews-20261006';
+const CACHE_NAME='ons-20261013d';
 const CORE=[
   '/',
   '/index.html',
-  '/assets/css/styles-v518.css?v=20260917a',
-  '/assets/js/site-v518.js?v=20260917a',
-  '/assets/img/ons-brand-icon-192.png?v=20260917a',
-  '/assets/img/ons-brand-icon-512.png?v=20260917a'
+  '/assets/css/styles-v518.css?v=20261013d',
+  '/assets/js/site-v518.js?v=20261013d',
+  '/assets/img/ons-brand-icon-192.png?v=20261013d',
+  '/assets/img/ons-brand-icon-512.png?v=20261013d'
 ];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
