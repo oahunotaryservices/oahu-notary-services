@@ -644,7 +644,7 @@ function setupBrandedAppSplash(){
   splash.setAttribute('aria-hidden','true');
   splash.innerHTML=`
     <div class="ons-app-splash-inner">
-      <img src="assets/img/ons-brand-icon-192.png?v=20260917a" alt="">
+      <img src="assets/img/ons-brand-icon-192.png?v=20261013d" alt="">
       <div class="ons-app-splash-name">Oahu Notary Services</div>
       <div class="ons-app-splash-tagline">Mobile Notary • Oʻahu, Hawaiʻi</div>
     </div>`;
@@ -660,7 +660,7 @@ function setupBrandedAppSplash(){
 function registerServiceWorker(){
   if(!('serviceWorker' in navigator)) return;
   window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('/service-worker-v518.js?v=20260917a',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
+    navigator.serviceWorker.register('/service-worker-v518.js?v=20261013d',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
   });
 }
 
